@@ -1,0 +1,11 @@
+
+{
+    "/api": {
+      "target": "http://1.14.73.74:8081",
+      "secure": false,
+      "changeOrigin": true,
+      "pathRewrite": {
+        "^/api": "/app"
+      }
+    }
+  }
