@@ -11,4 +11,9 @@ export class AuthService {
   login(userAccounts: string, password: string): Observable<any> {
     return this.apiService.post('user/login', { userAccounts, password });
   }
+
+  isAuthenticated(): boolean {
+    // Replace this with actual authentication logic
+    return !!localStorage.getItem('authToken');
+  }
 }

@@ -4,6 +4,7 @@ import { LoginComponent } from './auth/pages/login/login.component';
 import { RegisterComponent } from './auth/pages/register/register.component';
 import { ForgotPasswordComponent } from './auth/pages/forgot-password/forgot-password.component';
 import { AuthLayoutComponent } from './auth/components/auth-layout/auth-layout.component';
+import { authGuard } from './core/auth/auth.guard'; // Import authGuard
 
 export const routes: Routes = [
   {
@@ -19,6 +20,7 @@ export const routes: Routes = [
   {
     path: '',
     component: MainLayoutComponent,
+    canActivate: [authGuard], // Protect all child routes with authGuard
     children: [
       { path: '', redirectTo: 'dashboard', pathMatch: 'full' },
       {
