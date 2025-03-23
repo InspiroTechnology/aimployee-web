@@ -9,12 +9,6 @@ export class AuthService {
   constructor(private apiService: ApiService) {} // Inject ApiService
 
   login(userAccounts: string, password: string): Observable<any> {
-    console.log('login');
-    console.log(userAccounts);
-    console.log(password);
-    
-    
-    
     return this.apiService.post('user/login', { userAccounts, password });
   }
 }
