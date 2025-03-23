@@ -2,10 +2,10 @@ import { Component } from '@angular/core';
 import { MatToolbarModule } from '@angular/material/toolbar';
 import { MatButtonModule } from '@angular/material/button';
 import { RouterModule } from '@angular/router';
-import { LayOutService } from '../../service/lay-out.service';
+import { LayOutService } from '../../services/lay-out.service';
 import { MatIconModule } from '@angular/material/icon';
 import { CommonModule } from '@angular/common';
-import { ThemesService } from '../../service/themes.service';
+import { ThemesService } from '../../services/themes.service';
 
 @Component({
   selector: 'app-header',

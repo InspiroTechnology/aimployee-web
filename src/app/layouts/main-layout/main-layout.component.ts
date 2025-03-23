@@ -4,7 +4,7 @@ import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from '../header/header.component';
 import { SidebarComponent } from '../sidebar/sidebar.component';
 import { MatIconModule } from '@angular/material/icon';
-import { LayOutService } from '../../service/lay-out.service';
+import { LayOutService } from '../../services/lay-out.service';
 
 @Component({
   selector: 'app-main-layout',

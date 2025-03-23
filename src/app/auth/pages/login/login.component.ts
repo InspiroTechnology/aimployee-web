@@ -11,8 +11,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
-import { AuthService } from '../../../core/auth/auth.service';
-import { LoginService } from '../../services/login.service'; // Import LoginService
+import { LoginService } from '../../../services/login.service';
 
 @Component({
   selector: 'app-login',
