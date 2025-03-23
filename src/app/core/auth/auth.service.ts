@@ -15,6 +15,6 @@ export class AuthService {
     
     
     
-    return this.apiService.post('/app/user/login', { userAccounts, password });
+    return this.apiService.post('user/login', { userAccounts, password });
   }
 }

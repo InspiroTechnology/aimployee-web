@@ -6,7 +6,7 @@ import { Observable } from 'rxjs';
   providedIn: 'root',
 })
 export class ApiService {
-  private readonly baseUrl = 'http://1.14.73.74:8081/app/api/'; // Configurable base URL
+  private readonly baseUrl = 'http://1.14.73.74:8081/app/'; // Configurable base URL
 
   constructor(private http: HttpClient) {}
 
