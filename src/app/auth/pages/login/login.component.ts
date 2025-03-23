@@ -12,6 +12,7 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatIconModule } from '@angular/material/icon';
 import { RouterModule } from '@angular/router';
 import { AuthService } from '../../../core/auth/auth.service';
+import { LoginService } from '../../services/login.service'; // Import LoginService
 
 @Component({
   selector: 'app-login',
@@ -32,8 +33,8 @@ export class LoginComponent {
   hidePassword = true;
   loginForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private authService: AuthService) {
-    // Inject AuthService
+  constructor(private fb: FormBuilder, private loginService: LoginService) {
+    // Inject LoginService
     this.loginForm = this.fb.group({
       email: ['', [Validators.required, Validators.email]],
       password: ['', [Validators.required]],
@@ -43,16 +44,7 @@ export class LoginComponent {
   onSubmit() {
     if (this.loginForm.valid) {
       const { email, password } = this.loginForm.value;
-      this.authService.login(email, password).subscribe({
-        next: (response) => {
-          console.log('Login successful:', response);
-          // TODO: Handle successful login (e.g., navigate to dashboard)
-        },
-        error: (error) => {
-          console.error('Login failed:', error);
-          // TODO: Handle login error (e.g., show error message)
-        },
-      });
+      this.loginService.login(email, password); // Delegate to LoginService
     }
   }
 }
