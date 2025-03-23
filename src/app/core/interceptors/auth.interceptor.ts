@@ -1,42 +1,28 @@
-import { Injectable } from '@angular/core';
-import {
-  HttpEvent,
-  HttpHandler,
-  HttpInterceptor,
-  HttpRequest,
-} from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { inject } from '@angular/core';
+import { HttpInterceptorFn } from '@angular/common/http';
 import { TokenStorageService } from '../auth/token-storage.service';
 
-@Injectable()
-export class AuthInterceptor implements HttpInterceptor {
-  constructor(private tokenStorage: TokenStorageService) {}
+export const authInterceptor: HttpInterceptorFn = (req, next) => {
+  const tokenStorage = inject(TokenStorageService);
 
-  intercept(
-    req: HttpRequest<any>,
-    next: HttpHandler
-  ): Observable<HttpEvent<any>> {
-    const token = this.tokenStorage.getToken();
+  // console.log('AuthInterceptor triggered:', req);
+  const token = tokenStorage.getToken();
+  // console.log('token', token);
 
-    // ✅ 可选：排除 login/register 等接口
-    const excludedUrls = [
-      '/api/login',
-      '/api/register',
-      '/api/forgot-password',
-    ];
-    const isExcluded = excludedUrls.some((url) => req.url.includes(url));
+  // ✅ 可选：排除 login/register 等接口
+  const excludedUrls = ['/api/login', '/api/register', '/api/forgot-password'];
+  const isExcluded = excludedUrls.some((url) => req.url.includes(url));
 
-    // ✅ 如果存在 token 且不是排除的接口，就加上 Authorization 头
-    if (token && !isExcluded) {
-      const cloned = req.clone({
-        setHeaders: {
-          Authorization: `token ${token}`,
-        },
-      });
-      return next.handle(cloned);
-    }
-
-    // 没 token 或是白名单请求，原样发送
-    return next.handle(req);
+  // ✅ 如果存在 token 且不是排除的接口，就加上 Authorization 头
+  if (token && !isExcluded) {
+    const cloned = req.clone({
+      setHeaders: {
+        Authorization: `token ${token}`,
+      },
+    });
+    return next(cloned);
   }
-}
+
+  // 没 token 或是白名单请求，原样发送
+  return next(req);
+};
