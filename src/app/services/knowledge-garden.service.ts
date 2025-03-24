@@ -21,4 +21,11 @@ export class KnowledgeGardenService {
     const payload = { pageNo, pageSize, tags, publicOnly };
     return this.apiService.post('/api/knowledge/page', payload);
   }
+
+  uploadKnowledgeFile(file: File): Observable<any> {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.apiService.post('/api/knowledge/file', formData);
+  }
 }
