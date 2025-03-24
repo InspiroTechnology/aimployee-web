@@ -13,6 +13,8 @@ export class DashboardKnowledgeGardenComponent implements OnInit {
   knowledgeData: any[] = [];
   currentPage: number = 1;
   pageSize: number = 10;
+  totalRecords: number = 0;
+  Math = Math; // Expose Math object for use in the template
 
   constructor(private knowledgeGardenService: KnowledgeGardenService) {}
 
@@ -24,9 +26,14 @@ export class DashboardKnowledgeGardenComponent implements OnInit {
     this.knowledgeGardenService
       .getPaginatedKnowledge(this.currentPage, this.pageSize)
       .subscribe({
-        next: (data) => {
-          console.log('Paginated knowledge data:', data);
-          this.knowledgeData = data.items || []; // Assuming `data.items` contains the knowledge list
+        next: (res) => {
+          console.log('Paginated knowledge data:', res);
+          this.knowledgeData = res.data.records || []; // Assuming `data.records` contains the knowledge list
+          console.log(this.knowledgeData);
+          
+          this.totalRecords = res.data.total || 0; // Total number of records
+          console.log(this.totalRecords);
+          
         },
         error: (err) => {
           console.error('Error fetching paginated knowledge data:', err);
@@ -35,7 +42,12 @@ export class DashboardKnowledgeGardenComponent implements OnInit {
   }
 
   onPageChange(newPage: number): void {
-    this.currentPage = newPage;
-    this.loadKnowledge();
+    if (
+      newPage > 0 &&
+      newPage <= Math.ceil(this.totalRecords / this.pageSize)
+    ) {
+      this.currentPage = newPage;
+      this.loadKnowledge();
+    }
   }
 }

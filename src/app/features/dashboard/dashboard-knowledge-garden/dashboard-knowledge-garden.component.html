@@ -2,14 +2,17 @@
     <h2>Knowledge Garden</h2>
     <ul>
         <li *ngFor="let knowledge of knowledgeData">
-            {{ knowledge.title }}
+            {{ knowledge.fileName || 'Untitled' }}
         </li>
     </ul>
-    <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
-        Previous
-    </button>
-    <span>Page {{ currentPage }}</span>
-    <button (click)="onPageChange(currentPage + 1)">
-        Next
-    </button>
+    <div *ngIf="totalRecords === 0">No records found.</div>
+    <div *ngIf="totalRecords > 0">
+        <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+            Previous
+        </button>
+        <span>Page {{ currentPage }} of {{ Math.ceil(totalRecords / pageSize) }}</span>
+        <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage >= Math.ceil(totalRecords / pageSize)">
+            Next
+        </button>
+    </div>
 </div>
