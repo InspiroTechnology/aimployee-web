@@ -2,7 +2,13 @@
     <h2>Knowledge Garden</h2>
     <ul>
         <li *ngFor="let knowledge of knowledgeData">
-            {{ knowledge.fileName || 'Untitled' }}
+            <strong>{{ knowledge.fileName || 'Untitled' }}</strong>
+            <p *ngIf="knowledge.fileSizeKb">Size: {{ knowledge.fileSizeKb }} KB</p>
+            <p *ngIf="knowledge.createTime">Created: {{ knowledge.createTime | date:'medium' }}</p>
+            <p *ngIf="knowledge.updateTime">Last Updated: {{ knowledge.updateTime | date:'medium' }}</p>
+            <p *ngIf="knowledge.tags">Tags: {{ knowledge.tags.join(', ') }}</p>
+            <p *ngIf="knowledge.type">Type: {{ knowledge.type }}</p>
+            <!-- <button (click)="downloadFile(knowledge.fileUrl)" *ngIf="knowledge.fileUrl">Download</button> -->
         </li>
     </ul>
     <div *ngIf="totalRecords === 0">No records found.</div>

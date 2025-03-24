@@ -30,10 +30,9 @@ export class DashboardKnowledgeGardenComponent implements OnInit {
           console.log('Paginated knowledge data:', res);
           this.knowledgeData = res.data.records || []; // Assuming `data.records` contains the knowledge list
           console.log(this.knowledgeData);
-          
+
           this.totalRecords = res.data.total || 0; // Total number of records
           console.log(this.totalRecords);
-          
         },
         error: (err) => {
           console.error('Error fetching paginated knowledge data:', err);
@@ -50,4 +49,12 @@ export class DashboardKnowledgeGardenComponent implements OnInit {
       this.loadKnowledge();
     }
   }
+
+  // downloadFile(fileUrl: string): void {
+  //   const link = document.createElement('a');
+  //   link.href = fileUrl;
+  //   link.target = '_blank';
+  //   link.download = ''; // Optional: Set a default filename if needed
+  //   link.click();
+  // }
 }
