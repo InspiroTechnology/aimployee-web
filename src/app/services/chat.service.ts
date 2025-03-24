@@ -13,7 +13,7 @@ export class ChatService {
           'Content-Type': 'application/json',
           'X-API-Key': apiKey,
           token:
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ7XCJ1c2VySWRcIjozfSIsImlhdCI6MTc0Mjg1Nzg1OCwiZXhwIjoxNzQyODc5NDU4fQ.QvWrGFDkL0G2Hx4t8e_osk8Kif3au92KEUhJQK8VlyJKPUoOsUGMJELryVaf_mLlPHy43syJKyLLaIHRSiMYrw',
+            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ7XCJ1c2VySWRcIjozfSIsImlhdCI6MTc0Mjg1ODYxNiwiZXhwIjoxNzQyODgwMjE2fQ.Lg9vnhag0Glc3TMgWc_7tr90iK-OaSY970jWM7zUSQtLMcnCde8XlvR8_2frnQcVFfjSHEcuTsUOngFMEEZ0eA',
         },
         body: JSON.stringify(payload),
       })
@@ -36,9 +36,13 @@ export class ChatService {
 
             for (const line of lines) {
               try {
-                const json = JSON.parse(line);
-                if (json.event === 'message' && json.answer) {
-                  observer.next(json.answer); // 推送每段消息
+                if (line.startsWith('data:')) {
+                  const cleanedLine = line.replace(/^data:\s*/, '');
+                  const json = JSON.parse(cleanedLine);
+
+                  if (json.event === 'message' && json.answer) {
+                    observer.next(json.answer); // 一段段推送回答
+                  }
                 }
               } catch (err) {
                 console.warn('无法解析：', line);
