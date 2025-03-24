@@ -11,4 +11,14 @@ export class KnowledgeGardenService {
   getKnowledgeByUserId(userId: number): Observable<any> {
     return this.apiService.get('api/knowledge/config/get', { userId });
   }
+
+  getPaginatedKnowledge(
+    pageNo: number,
+    pageSize: number,
+    tags: string[] = [],
+    publicOnly: boolean = false
+  ): Observable<any> {
+    const payload = { pageNo, pageSize, tags, publicOnly };
+    return this.apiService.post('/api/knowledge/page', payload);
+  }
 }

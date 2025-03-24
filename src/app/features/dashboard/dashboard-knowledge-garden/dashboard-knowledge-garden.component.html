@@ -1,1 +1,15 @@
-<p>dashboard-knowledge-garden works!</p>
+<div>
+    <h2>Knowledge Garden</h2>
+    <ul>
+        <li *ngFor="let knowledge of knowledgeData">
+            {{ knowledge.title }}
+        </li>
+    </ul>
+    <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+        Previous
+    </button>
+    <span>Page {{ currentPage }}</span>
+    <button (click)="onPageChange(currentPage + 1)">
+        Next
+    </button>
+</div>

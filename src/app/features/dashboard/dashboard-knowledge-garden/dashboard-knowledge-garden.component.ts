@@ -10,16 +10,32 @@ import { KnowledgeGardenService } from '../../../services/knowledge-garden.servi
   styleUrls: ['./dashboard-knowledge-garden.component.scss'],
 })
 export class DashboardKnowledgeGardenComponent implements OnInit {
+  knowledgeData: any[] = [];
+  currentPage: number = 1;
+  pageSize: number = 10;
+
   constructor(private knowledgeGardenService: KnowledgeGardenService) {}
 
   ngOnInit(): void {
-    this.knowledgeGardenService.getKnowledgeByUserId(3).subscribe({
-      next: (data) => {
-        console.log('Knowledge data:', data);
-      },
-      error: (err) => {
-        console.error('Error fetching knowledge data:', err);
-      },
-    });
+    this.loadKnowledge();
+  }
+
+  loadKnowledge(): void {
+    this.knowledgeGardenService
+      .getPaginatedKnowledge(this.currentPage, this.pageSize)
+      .subscribe({
+        next: (data) => {
+          console.log('Paginated knowledge data:', data);
+          this.knowledgeData = data.items || []; // Assuming `data.items` contains the knowledge list
+        },
+        error: (err) => {
+          console.error('Error fetching paginated knowledge data:', err);
+        },
+      });
+  }
+
+  onPageChange(newPage: number): void {
+    this.currentPage = newPage;
+    this.loadKnowledge();
   }
 }
