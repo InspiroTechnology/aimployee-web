@@ -1,3 +1,29 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.top {
+  display: flex;
+  flex: 1;
+}
+
+.left {
+  flex: 1;
+  background-color: #f0f8ff; // Light blue for the left section
+}
+
+.right {
+  flex: 1;
+  background-color: #faebd7; // Light beige for the right section
+}
+
+.bottom {
+  flex: 1;
+  background-color: #f5f5dc; // Light cream for the bottom section
+}
+
 div {
   text-align: center;
 }
