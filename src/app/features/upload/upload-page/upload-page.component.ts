@@ -80,7 +80,9 @@ export class UploadPageComponent {
 
    // Actions for the table
    uploadItem(item: any): void {
-    item.upload();
+    console.log('Uploading item:', item);
+    
+    // item.upload();
   }
 
   cancelItem(item: any): void {

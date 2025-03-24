@@ -1,4 +1,12 @@
 <div class="upload-page">
+    Multiple
+    <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
+
+    Single
+    <input type="file" ng2FileSelect [uploader]="uploader" />
+
+
+
 
     <div class="drop-zone" [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" ng2FileDrop
         (fileOver)="fileOverBase($event)" [uploader]="uploader">
