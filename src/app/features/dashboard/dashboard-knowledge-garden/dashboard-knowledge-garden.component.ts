@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KnowledgeGardenService } from '../../../services/knowledge-garden.service';
+import { NewFlowChatComponent } from '../../chat/new-flow-chat/new-flow-chat.component';
+import { UploadPageComponent } from '../../upload/upload-page/upload-page.component';
 
 @Component({
   selector: 'app-dashboard-knowledge-garden',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,NewFlowChatComponent,UploadPageComponent],
   templateUrl: './dashboard-knowledge-garden.component.html',
   styleUrls: ['./dashboard-knowledge-garden.component.scss'],
 })
