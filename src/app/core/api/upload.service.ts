@@ -8,13 +8,20 @@ import { Observable } from 'rxjs';
 export class UploadService {
   constructor(private api: ApiService) {}
 
+  /**
+   * Uploads a file to the server.
+   * @param file The file to upload.
+   * @returns An observable that resolves to the server response.
+   */
   uploadFile(file: File): Observable<any> {
+    // console.log(file);
+    
     const formData = new FormData();
     formData.append('file', file);
-    return this.api.post('files/upload', formData);
+    return this.api.post('api/knowledge/file', formData);
   }
 
-  getUploadStatus(fileId: string): Observable<any> {
-    return this.api.get(`files/status/${fileId}`);
-  }
+  // getUploadStatus(fileId: string): Observable<any> {
+  //   return this.api.get(`files/status/${fileId}`);
+  // }
 }

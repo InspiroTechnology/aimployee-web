@@ -1,4 +1,9 @@
-import { Component, ViewEncapsulation } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  ViewEncapsulation,
+} from '@angular/core';
 import { FileUploadModule, FileUploader } from 'ng2-file-upload';
 import { CommonModule } from '@angular/common';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -23,13 +28,14 @@ import { MatIconModule } from '@angular/material/icon';
     MatTableModule,
     MatFormFieldModule,
     MatInputModule,
-    MatIconModule
+    MatIconModule,
   ],
   templateUrl: './upload-page.component.html',
   styleUrl: './upload-page.component.scss',
   encapsulation: ViewEncapsulation.None, // Disable encapsulation
 })
 export class UploadPageComponent {
+  @Output() uploadFile = new EventEmitter<File>(); // Emit file to parent component
   uploader: FileUploader;
   hasBaseDropZoneOver: boolean;
   // hasAnotherDropZoneOver: boolean;
@@ -68,21 +74,21 @@ export class UploadPageComponent {
     this.response = '';
 
     // this.uploader.response.subscribe((res) => (this.response = res));
-      // Update the data source whenever the queue changes
-      this.uploader.onAfterAddingFile = () => {
-        this.dataSource.data = this.uploader.queue;
-      };
+    // Update the data source whenever the queue changes
+    this.uploader.onAfterAddingFile = () => {
+      this.dataSource.data = this.uploader.queue;
+    };
   }
 
   public fileOverBase(e: any): void {
     this.hasBaseDropZoneOver = e;
   }
 
-   // Actions for the table
-   uploadItem(item: any): void {
-    console.log('Uploading item:', item);
-    
-    // item.upload();
+  // Actions for the table
+  uploadItem(item: any): void {
+    // console.log('Uploading item:', item);
+    const file = item._file; // Access the file object
+    this.uploadFile.emit(file); // Emit the file to the parent
   }
 
   cancelItem(item: any): void {

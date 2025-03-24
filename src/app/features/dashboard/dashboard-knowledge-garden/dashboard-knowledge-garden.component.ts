@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { KnowledgeGardenService } from '../../../services/knowledge-garden.service';
 import { NewFlowChatComponent } from '../../chat/new-flow-chat/new-flow-chat.component';
 import { UploadPageComponent } from '../../upload/upload-page/upload-page.component';
+import { UploadService } from '../../../core/api/upload.service';
 
 @Component({
   selector: 'app-dashboard-knowledge-garden',
   standalone: true,
-  imports: [CommonModule,NewFlowChatComponent,UploadPageComponent],
+  imports: [CommonModule, NewFlowChatComponent, UploadPageComponent],
   templateUrl: './dashboard-knowledge-garden.component.html',
   styleUrls: ['./dashboard-knowledge-garden.component.scss'],
 })
@@ -18,7 +19,10 @@ export class DashboardKnowledgeGardenComponent implements OnInit {
   totalRecords: number = 0;
   Math = Math; // Expose Math object for use in the template
 
-  constructor(private knowledgeGardenService: KnowledgeGardenService) {}
+  constructor(
+    private knowledgeGardenService: KnowledgeGardenService,
+    private uploadService: UploadService // Inject UploadService
+  ) {}
 
   ngOnInit(): void {
     this.loadKnowledge();
@@ -50,6 +54,19 @@ export class DashboardKnowledgeGardenComponent implements OnInit {
       this.currentPage = newPage;
       this.loadKnowledge();
     }
+  }
+
+  uploadFileThroughService(file: File): void {
+    // console.log('Uploading file:', file);
+    
+    this.uploadService.uploadFile(file).subscribe({
+      next: (response) => {
+        console.log('File uploaded successfully:', response);
+      },
+      error: (error) => {
+        console.error('Error uploading file:', error);
+      },
+    });
   }
 
   // downloadFile(fileUrl: string): void {
