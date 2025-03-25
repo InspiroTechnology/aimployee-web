@@ -1,19 +1,22 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { TokenStorageService } from '../core/auth/token-storage.service'; // Import TokenStorageService
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChatService {
+  constructor(private tokenStorageService: TokenStorageService) {} // Inject TokenStorageService
+
   streamChat(apiUrl: string, payload: any, apiKey: string): Observable<string> {
     return new Observable<string>((observer) => {
+      const token = this.tokenStorageService.getToken(); // Retrieve token dynamically
       fetch(apiUrl, {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
           'X-API-Key': apiKey,
-          token:
-            'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJzdWIiOiJ7XCJ1c2VySWRcIjozfSIsImlhdCI6MTc0Mjg1ODYxNiwiZXhwIjoxNzQyODgwMjE2fQ.Lg9vnhag0Glc3TMgWc_7tr90iK-OaSY970jWM7zUSQtLMcnCde8XlvR8_2frnQcVFfjSHEcuTsUOngFMEEZ0eA',
+          token: token || '', // Use the retrieved token or an empty string
         },
         body: JSON.stringify(payload),
       })
