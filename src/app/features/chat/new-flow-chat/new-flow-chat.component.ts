@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ChatInputComponent } from '../chat-input/chat-input.component';
 import { ChatSettingsComponent } from '../chat-settings/chat-settings.component';
 import { ChatService } from '../../../services/chat.service';
-import { TokenStorageService } from '../../../core/auth/token-storage.service';
+import { TokenStorageService } from '../../../services/token-storage.service';
 
 @Component({
   selector: 'app-new-flow-chat',

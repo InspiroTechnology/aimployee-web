@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
-import { TokenStorageService } from '../core/auth/token-storage.service'; // Import TokenStorageService
 import { ApiService } from './api.service';
+import { TokenStorageService } from './token-storage.service';
 
 @Injectable({
   providedIn: 'root',
