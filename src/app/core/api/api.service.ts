@@ -17,8 +17,16 @@ export class ApiService {
     });
   }
 
-  post<T>(endpoint: string, data: any): Observable<T> {
-    return this.http.post<T>(`${this.baseUrl}/${endpoint}`, data);
+  post<T>(
+    endpoint: string,
+    data: any,
+    options?: { headers?: any }
+  ): Observable<T> {
+    return this.http.post<T>(
+      `${this.baseUrl}/${endpoint}`,
+      data,
+      options || {}
+    );
   }
 
   put<T>(endpoint: string, data: any): Observable<T> {
