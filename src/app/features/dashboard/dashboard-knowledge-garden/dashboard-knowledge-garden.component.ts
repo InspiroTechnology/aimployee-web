@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { KnowledgeGardenService } from '../../../services/knowledge-garden.service';
 import { NewFlowChatComponent } from '../../chat/new-flow-chat/new-flow-chat.component';
 import { UploadPageComponent } from '../../upload/upload-page/upload-page.component';
-import { UploadService } from '../../../core/api/upload.service';
+import { UploadService } from '../../../services/upload.service';
 
 @Component({
   selector: 'app-dashboard-knowledge-garden',
