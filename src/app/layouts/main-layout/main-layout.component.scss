@@ -1,6 +1,6 @@
 .main-layout {
   display: flex;
-  height: calc(100vh - 16px); // Subtract the border size (3px top + 3px bottom)
+  height: calc(100vh - 100px); // Remaining height after header
   box-sizing: border-box; // Include border in the total height and width
   border: 3px solid var(--border-color); // Example border
   border-radius: var(--border-radius-sm);
@@ -33,6 +33,7 @@
     margin: 5px;
   }
   .content-header {
+    height: 100px; // Fixed height for the header
     flex-shrink: 0; // Prevent shrinking
   }
 
