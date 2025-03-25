@@ -17,9 +17,9 @@ export class DashboardHeroSectionComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {
-    console.log(this.slogans);
-    console.log(this.header);
-    console.log(this.containerStyle);
-    console.log(this.alignment);
+    // console.log(this.slogans);
+    // console.log(this.header);
+    // console.log(this.containerStyle);
+    // console.log(this.alignment);
   }
 }
