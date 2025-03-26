@@ -69,8 +69,7 @@ export class SingleFileUploadComponent {
   // Actions for the table
   uploadItem(item: any): void {
     const file = item._file; // Access the file object
-    // this.uploadFile.emit(file); // Emit the file to the parent
-    console.log('Uploading file:', file);
+    this.uploadFile.emit(file); // Emit the file to the parent
   }
 
   triggerFileInput(): void {

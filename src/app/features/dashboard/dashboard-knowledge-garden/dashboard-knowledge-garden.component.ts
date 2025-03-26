@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { KnowledgeGardenService } from '../../../services/knowledge-garden.service';
 import { NewFlowChatComponent } from '../../chat/new-flow-chat/new-flow-chat.component';
-import { UploadPageComponent } from '../../upload/upload-page/upload-page.component';
 import { UploadService } from '../../../services/upload.service';
 import { SidebarTagsComponent } from './sidebar-tags/sidebar-tags.component';
 import { SingleFileUploadComponent } from '../../upload/single-file-upload/single-file-upload.component';
@@ -10,7 +9,7 @@ import { SingleFileUploadComponent } from '../../upload/single-file-upload/singl
 @Component({
   selector: 'app-dashboard-knowledge-garden',
   standalone: true,
-  imports: [CommonModule, NewFlowChatComponent, UploadPageComponent,SidebarTagsComponent,SingleFileUploadComponent],
+  imports: [CommonModule, NewFlowChatComponent,SidebarTagsComponent,SingleFileUploadComponent],
   templateUrl: './dashboard-knowledge-garden.component.html',
   styleUrls: ['./dashboard-knowledge-garden.component.scss'],
 })
