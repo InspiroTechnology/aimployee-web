@@ -7,7 +7,9 @@
     </div>
     <div class="tags-container">
         <mat-nav-list>
-            <mat-list-item *ngFor="let tag of tags">{{ tag }}</mat-list-item>
+            <mat-list-item *ngFor="let tag of tags"  (click)="selectTag(tag)">
+                <p class="gray-text" [ngClass]="{'selected-tag': tag === tagService.selectedTag}">{{ tag }}</p>
+            </mat-list-item>
         </mat-nav-list>
     </div>
 </div>

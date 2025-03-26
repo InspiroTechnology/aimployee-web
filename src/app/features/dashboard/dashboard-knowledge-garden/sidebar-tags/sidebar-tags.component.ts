@@ -8,14 +8,15 @@ import { MatListModule } from '@angular/material/list';
 @Component({
   selector: 'app-sidebar-tags',
   standalone: true,
-  imports: [CommonModule,MatIconModule, MatButtonModule, MatListModule],
+  imports: [CommonModule, MatIconModule, MatButtonModule, MatListModule],
   templateUrl: './sidebar-tags.component.html',
   styleUrls: ['./sidebar-tags.component.scss'],
 })
 export class SidebarTagsComponent implements OnInit {
   tags: string[] = [];
+  selectedTag: string | null = null; // Track the selected tag
 
-  constructor(private tagService: TagService) {}
+  constructor(public tagService: TagService) {}
 
   ngOnInit(): void {
     this.fetchTags();
@@ -26,5 +27,10 @@ export class SidebarTagsComponent implements OnInit {
     this.tagService.getSuggestedTags(fileId).subscribe((tags) => {
       this.tags = tags;
     });
+  }
+
+  selectTag(tag: string): void {
+    this.tagService.setSelectedTag(tag); // Update the selected tag in the service
+    // console.log('Selected tag:', tag);
   }
 }

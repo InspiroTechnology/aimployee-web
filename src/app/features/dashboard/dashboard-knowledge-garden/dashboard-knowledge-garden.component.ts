@@ -5,11 +5,17 @@ import { NewFlowChatComponent } from '../../chat/new-flow-chat/new-flow-chat.com
 import { UploadService } from '../../../services/upload.service';
 import { SidebarTagsComponent } from './sidebar-tags/sidebar-tags.component';
 import { SingleFileUploadComponent } from '../../upload/single-file-upload/single-file-upload.component';
+import { TagService } from '../../../services/tag.service';
 
 @Component({
   selector: 'app-dashboard-knowledge-garden',
   standalone: true,
-  imports: [CommonModule, NewFlowChatComponent,SidebarTagsComponent,SingleFileUploadComponent],
+  imports: [
+    CommonModule,
+    NewFlowChatComponent,
+    SidebarTagsComponent,
+    SingleFileUploadComponent,
+  ],
   templateUrl: './dashboard-knowledge-garden.component.html',
   styleUrls: ['./dashboard-knowledge-garden.component.scss'],
 })
@@ -22,7 +28,8 @@ export class DashboardKnowledgeGardenComponent implements OnInit {
 
   constructor(
     private knowledgeGardenService: KnowledgeGardenService,
-    private uploadService: UploadService // Inject UploadService
+    private uploadService: UploadService, // Inject UploadService
+    private tagService: TagService // Inject TagService
   ) {}
 
   ngOnInit(): void {
@@ -58,18 +65,22 @@ export class DashboardKnowledgeGardenComponent implements OnInit {
   }
 
   uploadFileThroughService(file: File): void {
-    // console.log('Uploading file:', file);
-    const tags = ['knowledge', 'file']; // Tags to associate with the file
+    // Get tags from TagService
+    const tags = this.tagService.getSelectedTag()
+      ? [this.tagService.getSelectedTag()]
+      : [];
     const storeOriginal = true; // Whether to store the original file
 
-    this.uploadService.uploadFile(file, storeOriginal, tags.join(',')).subscribe({
-      next: (response) => {
-        console.log('File uploaded successfully:', response);
-      },
-      error: (error) => {
-        console.error('Error uploading file:', error);
-      },
-    });
+    this.uploadService
+      .uploadFile(file, storeOriginal, tags.join(','))
+      .subscribe({
+        next: (response) => {
+          console.log('File uploaded successfully:', response);
+        },
+        error: (error) => {
+          console.error('Error uploading file:', error);
+        },
+      });
   }
 
   // downloadFile(fileUrl: string): void {
