@@ -45,7 +45,7 @@ export class SingleFileUploadComponent {
 
   constructor() {
     this.uploader = new FileUploader({
-      url: 'https://evening-anchorage-3159.herokuapp.com/api/',
+      url: '',
       disableMultipart: true, // 'DisableMultipart' must be 'true' for formatDataFunction to be called.
       formatDataFunctionIsAsync: true,
       formatDataFunction: async (item: any) => {
