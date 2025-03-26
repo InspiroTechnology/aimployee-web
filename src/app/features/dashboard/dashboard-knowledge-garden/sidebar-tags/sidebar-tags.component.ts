@@ -31,6 +31,6 @@ export class SidebarTagsComponent implements OnInit {
 
   selectTag(tag: string): void {
     this.tagService.setSelectedTag(tag); // Update the selected tag in the service
-    console.log('Selected tag:', tag);
+    // console.log('Selected tag:', tag);
   }
 }

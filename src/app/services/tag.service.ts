@@ -53,7 +53,7 @@ export class TagService {
    * @param tag The tag to set as selected
    */
   setSelectedTag(tag: string): void {
-    console.log('Selected tag:', tag);
+    // console.log('Selected tag:', tag);
     this.selectedTag = tag;
     localStorage.setItem('selectedTag', tag);
   }
