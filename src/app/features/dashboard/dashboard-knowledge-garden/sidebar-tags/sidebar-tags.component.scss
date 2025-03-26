@@ -48,3 +48,9 @@ button[mat-icon-button] {
   flex-shrink: 0;
   margin: 0; /* Removes any default margin */
 }
+
+.selected-tag {
+  color: var(--text-primary-color); /* Optional: Adjust color as needed */
+
+  font-weight: bold; /* Optional: Make text bold */
+}

@@ -14,6 +14,7 @@ import { MatListModule } from '@angular/material/list';
 })
 export class SidebarTagsComponent implements OnInit {
   tags: string[] = [];
+  selectedTag: string | null = null; // Track the selected tag
 
   constructor(private tagService: TagService) {}
 
@@ -26,5 +27,11 @@ export class SidebarTagsComponent implements OnInit {
     this.tagService.getSuggestedTags(fileId).subscribe((tags) => {
       this.tags = tags;
     });
+  }
+
+  selectTag(tag: string): void {
+    this.selectedTag = tag; // Update the selected tag
+    console.log('Selected tag:', tag);
+    
   }
 }
