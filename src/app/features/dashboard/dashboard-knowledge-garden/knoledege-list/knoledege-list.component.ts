@@ -39,22 +39,18 @@ export class KnoledegeListComponent implements OnInit, OnDestroy {
   }
 
   loadKnowledge(): void {
-    // Get tags from TagService and filter out null values
     const tags = this.tagService.getSelectedTag()
       ? [this.tagService.getSelectedTag()]
       : [];
     const filteredTags = tags.filter((tag): tag is string => tag !== null);
 
     this.knowledgeGardenService
-      .getPaginatedKnowledge(this.currentPage, this.pageSize, filteredTags)
+      .fetchKnowledge(this.currentPage, this.pageSize, filteredTags)
       .subscribe({
         next: (res) => {
           console.log('Paginated knowledge data:', res);
-          this.knowledgeData = res.data.records || []; // Assuming `data.records` contains the knowledge list
-          console.log(this.knowledgeData);
-
-          this.totalRecords = res.data.total || 0; // Total number of records
-          console.log(this.totalRecords);
+          this.knowledgeData = res.data.records || [];
+          this.totalRecords = res.data.total || 0;
         },
         error: (err) => {
           console.error('Error fetching paginated knowledge data:', err);

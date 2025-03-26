@@ -22,6 +22,15 @@ export class KnowledgeGardenService {
     return this.apiService.post('/api/knowledge/page', payload);
   }
 
+  fetchKnowledge(
+    pageNo: number,
+    pageSize: number,
+    tags: string[] = []
+  ): Observable<any> {
+    const filteredTags = tags.filter((tag): tag is string => tag !== null);
+    return this.getPaginatedKnowledge(pageNo, pageSize, filteredTags);
+  }
+
   uploadKnowledgeFile(file: File): Observable<any> {
     const formData = new FormData();
     formData.append('file', file);
