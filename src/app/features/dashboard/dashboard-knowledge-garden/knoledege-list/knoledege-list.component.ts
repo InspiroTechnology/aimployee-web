@@ -7,21 +7,22 @@ import { KnowledgeGardenService } from '../../../../services/knowledge-garden.se
   standalone: true,
   imports: [CommonModule],
   templateUrl: './knoledege-list.component.html',
-  styleUrls: ['./knoledege-list.component.scss']
+  styleUrls: ['./knoledege-list.component.scss'],
 })
 export class KnoledegeListComponent implements OnInit {
-knowledgeData: any[] = [];
+  knowledgeData: any[] = [];
   currentPage: number = 1;
   pageSize: number = 10;
   totalRecords: number = 0;
   Math = Math; // Expose Math object for use in the template
+  Array = Array; // Expose Array object for use in the template
 
-  constructor(    private knowledgeGardenService: KnowledgeGardenService,
-  ) { }
+  constructor(private knowledgeGardenService: KnowledgeGardenService) {}
 
   ngOnInit(): void {
     this.loadKnowledge();
   }
+
   loadKnowledge(): void {
     this.knowledgeGardenService
       .getPaginatedKnowledge(this.currentPage, this.pageSize)
@@ -49,5 +50,4 @@ knowledgeData: any[] = [];
       this.loadKnowledge();
     }
   }
-
 }
