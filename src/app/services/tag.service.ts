@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, EventEmitter } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { ApiService } from './api.service';
 
@@ -7,6 +7,7 @@ import { ApiService } from './api.service';
 })
 export class TagService {
   public selectedTag: string | null = null; // Track the selected tag
+  public selectedTagChanged: EventEmitter<void> = new EventEmitter();
 
   constructor(private api: ApiService) {
     const storedTag = localStorage.getItem('selectedTag');
@@ -56,6 +57,7 @@ export class TagService {
     // console.log('Selected tag:', tag);
     this.selectedTag = tag;
     localStorage.setItem('selectedTag', tag);
+    this.selectedTagChanged.emit();
   }
 
   // /**
