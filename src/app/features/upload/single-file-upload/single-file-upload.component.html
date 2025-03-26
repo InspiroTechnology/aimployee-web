@@ -1,8 +1,9 @@
 <div class="upload-page">
-  
+
 
     <div class="drop-zone" [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" ng2FileDrop
-        (fileOver)="fileOverBase($event)" [uploader]="uploader" (click)="triggerFileInput()">
+        [uploader]="uploader" (click)="triggerFileInput()"
+        (onFileDrop)="onFileDropped($event)">
         <h4>拖拽文件到此处，或点击上传</h4>
         <p>支持格式：TXT、DOCX，单个文件 ≤ 15MB</p>
     </div>

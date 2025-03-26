@@ -64,14 +64,13 @@ export class SingleFileUploadComponent {
     this.response = '';
   }
 
-  public fileOverBase(e: any): void {
-    this.hasBaseDropZoneOver = e;
-  }
+
 
   // Actions for the table
   uploadItem(item: any): void {
     const file = item._file; // Access the file object
-    this.uploadFile.emit(file); // Emit the file to the parent
+    // this.uploadFile.emit(file); // Emit the file to the parent
+    console.log('Uploading file:', file);
   }
 
   triggerFileInput(): void {
@@ -83,7 +82,15 @@ export class SingleFileUploadComponent {
     if (input.files && input.files.length > 0) {
       const file = input.files[0];
       console.log('Selected file:', file);
-      // Handle the file upload logic here
+      this.uploadItem({ _file: file }); // Call uploadItem with the selected file
+    }
+  }
+
+  onFileDropped(files: File[]): void {
+    if (files && files.length > 0) {
+      const file = files[0];
+      console.log('Dropped file:', file);
+      this.uploadItem({ _file: file }); // Call uploadItem with the dropped file
     }
   }
 }
