@@ -38,20 +38,21 @@ export class TagService {
   }
 
   /**
-   * Get the currently selected tag
+   * Get the currently selected tag from localStorage
    */
   getSelectedTag(): string | null {
-    return this.selectedTag;
+    const tag = localStorage.getItem('selectedTag');
+    return tag ? tag : null;
   }
 
   /**
-   * Set the selected tag
+   * Set the selected tag and save it to localStorage
    * @param tag The tag to set as selected
    */
   setSelectedTag(tag: string): void {
     console.log('Selected tag:', tag);
-    
     this.selectedTag = tag;
+    localStorage.setItem('selectedTag', tag);
   }
 
   // /**
