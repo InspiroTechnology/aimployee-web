@@ -39,3 +39,10 @@ h3 {
 button[mat-icon-button] {
   color: var(--primary-color); /* Optional: Adjust color as needed */
 }
+
+.gray-text {
+  color: #737373;
+  // display: block;
+  // padding: 0.5rem 1rem;
+  // flex-shrink: 0;
+}
