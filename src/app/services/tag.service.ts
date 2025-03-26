@@ -8,7 +8,10 @@ import { ApiService } from './api.service';
 export class TagService {
   public selectedTag: string | null = null; // Track the selected tag
 
-  constructor(private api: ApiService) {}
+  constructor(private api: ApiService) {
+    const storedTag = localStorage.getItem('selectedTag');
+    this.selectedTag = storedTag ? storedTag : null;
+  }
 
   /**
    * Get AI-recommended tags
