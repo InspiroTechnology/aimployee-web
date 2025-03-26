@@ -1,4 +1,11 @@
-import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
+import {
+  Component,
+  ElementRef,
+  EventEmitter,
+  OnInit,
+  Output,
+  ViewChild,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -34,7 +41,6 @@ export class SingleFileUploadComponent {
 
   uploader: FileUploader;
   hasBaseDropZoneOver: boolean;
-  // hasAnotherDropZoneOver: boolean;
   response: string;
 
   constructor() {
@@ -55,8 +61,6 @@ export class SingleFileUploadComponent {
     });
 
     this.hasBaseDropZoneOver = false;
-    // this.hasAnotherDropZoneOver = false;
-
     this.response = '';
   }
 
@@ -66,7 +70,6 @@ export class SingleFileUploadComponent {
 
   // Actions for the table
   uploadItem(item: any): void {
-    // console.log('Uploading item:', item);
     const file = item._file; // Access the file object
     this.uploadFile.emit(file); // Emit the file to the parent
   }
@@ -74,7 +77,7 @@ export class SingleFileUploadComponent {
   triggerFileInput(): void {
     this.singleFileInput.nativeElement.click();
   }
-  
+
   onFileSelected(event: Event): void {
     const input = event.target as HTMLInputElement;
     if (input.files && input.files.length > 0) {
