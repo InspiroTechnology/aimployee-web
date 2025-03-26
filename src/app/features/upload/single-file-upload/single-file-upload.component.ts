@@ -34,15 +34,7 @@ export class SingleFileUploadComponent {
   // hasAnotherDropZoneOver: boolean;
   response: string;
 
-  // Define columns for the Material table
-  displayedColumns: string[] = [
-    'name',
-    'size',
-    'progress',
-    'status',
-    'actions',
-  ];
-  dataSource = new MatTableDataSource<any>();
+
 
   constructor() {
     this.uploader = new FileUploader({
@@ -66,11 +58,7 @@ export class SingleFileUploadComponent {
 
     this.response = '';
 
-    // this.uploader.response.subscribe((res) => (this.response = res));
-    // Update the data source whenever the queue changes
-    this.uploader.onAfterAddingFile = () => {
-      this.dataSource.data = this.uploader.queue;
-    };
+ 
   }
 
   public fileOverBase(e: any): void {
@@ -84,16 +72,5 @@ export class SingleFileUploadComponent {
     this.uploadFile.emit(file); // Emit the file to the parent
   }
 
-  cancelItem(item: any): void {
-    item.cancel();
-  }
 
-  removeItem(item: any): void {
-    item.remove();
-    this.dataSource.data = this.uploader.queue; // Update data source
-  }
-
-  // public fileOverAnother(e: any): void {
-  //   this.hasAnotherDropZoneOver = e;
-  // }
 }
