@@ -1,9 +1,22 @@
 .flex-container {
-    display: flex;
-    flex-direction: column; /* Ensures items stack vertically */
-    align-items: flex-start; /* Aligns items to the start horizontally */
+  display: flex;
+  flex-direction: column; /* Ensures items stack vertically */
+  align-items: flex-start; /* Aligns items to the start horizontally */
+  width: 100%;
 }
 
 .tags-container {
-    width: 100%; /* Optional: Adjust width as needed */
+  width: 100%; /* Optional: Adjust width as needed */
 }
+
+mat-list-item {
+    width: calc(100% - 16px); /* Adjust width to account for horizontal margins */
+    border: 2px solid var(--border-color);
+    border-radius: var(--border-radius-md);
+    box-sizing: border-box;
+    margin: 0 8px 8px 8px; /* Adds 8px gap on left, right, and bottom */
+  }
+  
+  mat-list-item:last-child {
+    margin-bottom: 0; /* Removes bottom margin for the last item */
+  }
