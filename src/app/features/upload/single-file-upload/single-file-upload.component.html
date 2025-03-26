@@ -1,22 +1,12 @@
 <div class="upload-page">
-    Multiple
-    <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
-
-    Single
-    <input type="file" ng2FileSelect [uploader]="uploader" />
-
-
-
+  
 
     <div class="drop-zone" [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" ng2FileDrop
-        (fileOver)="fileOverBase($event)" [uploader]="uploader">
-        <h4>将文件拖拽到此处，本地上传, 云文件</h4>
-        <p>支持文件格式：支持 TXT、 MARKDOWN、 MDX、 PDF、 HTML、 XLSX、 XLS、 DOCX、 CSV、 MD、 HTM，单个文件不超过 15MB</p>
+        (fileOver)="fileOverBase($event)" [uploader]="uploader" (click)="triggerFileInput()">
+        <h4>拖拽文件到此处，或点击上传</h4>
+        <p>支持格式：TXT、DOCX，单个文件 ≤ 15MB</p>
     </div>
 
-
-
-
-
-
+    <!-- Hidden file input for single file upload -->
+    <input type="file" #singleFileInput style="display: none;" (change)="onFileSelected($event)" />
 </div>

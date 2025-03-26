@@ -1,4 +1,4 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, ElementRef, EventEmitter, OnInit, Output, ViewChild } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FileUploader, FileUploadModule } from 'ng2-file-upload';
 import { MatToolbarModule } from '@angular/material/toolbar';
@@ -24,17 +24,18 @@ import { MatIconModule } from '@angular/material/icon';
     MatFormFieldModule,
     MatInputModule,
     MatIconModule,
-  ],  templateUrl: './single-file-upload.component.html',
-  styleUrls: ['./single-file-upload.component.scss']
+  ],
+  templateUrl: './single-file-upload.component.html',
+  styleUrls: ['./single-file-upload.component.scss'],
 })
 export class SingleFileUploadComponent {
   @Output() uploadFile = new EventEmitter<File>(); // Emit file to parent component
+  @ViewChild('singleFileInput') singleFileInput!: ElementRef;
+
   uploader: FileUploader;
   hasBaseDropZoneOver: boolean;
   // hasAnotherDropZoneOver: boolean;
   response: string;
-
-
 
   constructor() {
     this.uploader = new FileUploader({
@@ -57,8 +58,6 @@ export class SingleFileUploadComponent {
     // this.hasAnotherDropZoneOver = false;
 
     this.response = '';
-
- 
   }
 
   public fileOverBase(e: any): void {
@@ -72,5 +71,16 @@ export class SingleFileUploadComponent {
     this.uploadFile.emit(file); // Emit the file to the parent
   }
 
-
+  triggerFileInput(): void {
+    this.singleFileInput.nativeElement.click();
+  }
+  
+  onFileSelected(event: Event): void {
+    const input = event.target as HTMLInputElement;
+    if (input.files && input.files.length > 0) {
+      const file = input.files[0];
+      console.log('Selected file:', file);
+      // Handle the file upload logic here
+    }
+  }
 }
