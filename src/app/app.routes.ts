@@ -45,6 +45,13 @@ export const routes: Routes = [
           ).then((m) => m.DashboardKnowledgeGardenComponent),
       },
       {
+        path: 'social-media',
+        loadComponent: () =>
+          import(
+            './features/dashboard/social-meida-management/social-meida-management.component'
+          ).then((m) => m.SocialMeidaManagementComponent),
+      },
+      {
         path: 'explore-more',
         loadComponent: () =>
           import(

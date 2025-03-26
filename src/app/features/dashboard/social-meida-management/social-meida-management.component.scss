@@ -1,0 +1,126 @@
+.split-container {
+  display: flex;
+  gap: 16px;
+  /* 你可以设置一个最大宽度或者宽度百分比，视具体布局需求而定 */
+}
+
+.left-column {
+  flex: 1;
+}
+
+.right-column {
+  flex: 1;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.post-preview-card {
+  width: 100%;
+  max-width: 400px; /* 可根据需要调整预览卡片宽度 */
+}
+
+
+.upload-demo-container {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 16px;
+}
+
+/* 平台选择区 */
+.platform-selection {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+
+  .platform-title {
+    font-weight: bold;
+  }
+}
+
+/* 上传卡片 */
+.upload-card {
+  width: 300px;
+
+  .upload-placeholder {
+    text-align: center;
+    font-size: 1.2rem;
+    color: #666;
+    height: 100px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px dashed #ccc;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+
+  /* 拖拽时的高亮样式 */
+  .upload-placeholder.drag-over {
+    background-color: #f0f8ff; /* 浅蓝色或你喜欢的颜色 */
+    border-color: #3f51b5; /* Primary 色 */
+  }
+}
+
+/* 预览区 */
+.grid-preview {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+  // 如果想让网格自适应行高，可用 auto-rows 或 aspect-ratio 等
+}
+
+.grid-item {
+  // 适当样式
+  img, video {
+    width: 100%;
+    height: auto;
+    object-fit: cover;
+  }
+}
+
+/* 图片/视频填满 card */
+.preview-image,
+.preview-video {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 4px;
+}
+
+/* 风格选择 */
+.style-selection-title {
+  font-size: 1.2rem;
+  margin-bottom: 8px;
+}
+
+.style-selection {
+  display: flex;
+  gap: 8px;
+}
+
+.prompt-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.prompt-input {
+  flex: 1;
+}
+
+.preview-images {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+  
+  img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 4px;
+  }
+}

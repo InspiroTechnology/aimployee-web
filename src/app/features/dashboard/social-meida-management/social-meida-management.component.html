@@ -1,0 +1,145 @@
+<!-- 使用 nav mat-tab-nav-bar -->
+<nav
+  mat-tab-nav-bar
+  [tabPanel]="tabPanel"
+  class="my-nav-bar"
+  mat-stretch-tabs="false"
+>
+  <!-- 这里遍历 links 数组，生成若干 <a mat-tab-link> -->
+  <a
+    mat-tab-link
+    *ngFor="let link of links"
+    (click)="activeLink = link"
+    [active]="activeLink === link"
+  >
+    {{ link }}
+  </a>
+</nav>
+
+<!-- 面板区域，用于显示对应内容 -->
+<mat-tab-nav-panel #tabPanel>
+  <!-- 如果 activeLink === '单次发帖'，显示单次发帖的内容 -->
+  <div *ngIf="activeLink === '单次发帖'">
+    <div class="split-container">
+      <!-- 左侧：上传及相关内容 -->
+      <div class="left-column">
+        <div class="upload-demo-container">
+          <!-- 平台选择区 -->
+          <div class="platform-selection">
+            <span class="platform-title">选择平台（多选）</span>
+            <mat-checkbox [(ngModel)]="selectedPlatforms.fb">FB</mat-checkbox>
+            <mat-checkbox [(ngModel)]="selectedPlatforms.wx">WX</mat-checkbox>
+            <mat-checkbox [(ngModel)]="selectedPlatforms.xhs">XHS</mat-checkbox>
+            <mat-checkbox [(ngModel)]="selectedPlatforms.ins">INS</mat-checkbox>
+          </div>
+
+          <!-- 图片/视频上传区 -->
+          <mat-card class="upload-card">
+            <mat-card-content>
+              <!-- 拖拽事件 + 点击事件均触发隐藏的 input -->
+              <div
+                class="upload-placeholder"
+                [class.drag-over]="isDragOver"
+                (click)="fileInput.click()"
+                (dragover)="onDragOver($event)"
+                (dragleave)="onDragLeave($event)"
+                (drop)="onDrop($event)"
+              >
+                <p>图片 / 视频<br />上传</p>
+              </div>
+              <input
+                #fileInput
+                type="file"
+                (change)="onFileSelected($event)"
+                multiple
+                hidden
+              />
+            </mat-card-content>
+          </mat-card>
+
+          <!-- 预览区：仅当 previewList 有内容时显示 -->
+          <div class="grid-preview" *ngIf="previewList.length > 0">
+            <div class="grid-item" *ngFor="let item of previewList">
+              <img *ngIf="item.type === 'image'" [src]="item.src" />
+              <video
+                *ngIf="item.type === 'video'"
+                [src]="item.src"
+                controls
+              ></video>
+            </div>
+          </div>
+
+          <!-- 风格选择 -->
+          <div class="style-selection">
+            <h3 class="style-selection-title">选择图片风格</h3>
+            <button
+              mat-button
+              [color]="currentStyle === 1 ? 'primary' : ''"
+              (click)="selectStyle(1)"
+            >
+              风格1
+            </button>
+            <button
+              mat-button
+              [color]="currentStyle === 2 ? 'primary' : ''"
+              (click)="selectStyle(2)"
+            >
+              风格2
+            </button>
+            <button
+              mat-button
+              [color]="currentStyle === 3 ? 'primary' : ''"
+              (click)="selectStyle(3)"
+            >
+              风格3
+            </button>
+          </div>
+
+          <!-- 提示词输入区 -->
+          <div class="prompt-container">
+            <mat-form-field appearance="outline" class="prompt-input">
+              <mat-label>文案提示词</mat-label>
+              <input
+                matInput
+                placeholder="请输入提示词"
+                [(ngModel)]="promptText"
+              />
+            </mat-form-field>
+            <button mat-raised-button color="primary" (click)="sendPrompt()">
+              发送
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右侧：模拟帖子预览区域 -->
+      <div class="right-column">
+        <mat-card class="post-preview-card">
+          <mat-card-header>
+            <mat-card-title>帖子预览</mat-card-title>
+          </mat-card-header>
+          <mat-card-content>
+            <!-- 模拟帖子的预览内容 -->
+            <p>这里显示帖子的预览内容（示例）</p>
+            <!-- 如果有图片，则展示前三张图片 -->
+            <ng-container *ngIf="previewImages.length > 0">
+              <div class="preview-images">
+                <img
+                  *ngFor="let img of previewImages"
+                  [src]="img.src"
+                  alt="预览图片"
+                />
+              </div>
+            </ng-container>
+            <p style="margin-top: 8px">这是模拟的帖子内容文字...</p>
+          </mat-card-content>
+        </mat-card>
+      </div>
+    </div>
+  </div>
+
+  <!-- 如果 activeLink === '自动批量发帖'，显示自动批量发帖的内容 -->
+  <div *ngIf="activeLink === '自动批量发帖'">
+    <p>这里是“自动批量发帖”的内容...</p>
+  </div>
+</mat-tab-nav-panel>
