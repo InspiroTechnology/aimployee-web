@@ -59,8 +59,10 @@ export class DashboardKnowledgeGardenComponent implements OnInit {
 
   uploadFileThroughService(file: File): void {
     // console.log('Uploading file:', file);
-    
-    this.uploadService.uploadFile(file).subscribe({
+    const tags = ['knowledge', 'file']; // Tags to associate with the file
+    const storeOriginal = true; // Whether to store the original file
+
+    this.uploadService.uploadFile(file, storeOriginal, tags.join(',')).subscribe({
       next: (response) => {
         console.log('File uploaded successfully:', response);
       },
