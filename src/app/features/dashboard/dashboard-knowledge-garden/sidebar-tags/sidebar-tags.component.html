@@ -1,4 +1,10 @@
 <div class="flex-container">
+    <div class="top-bar">
+        <h3>知识库</h3>
+        <button mat-icon-button aria-label="Add tag">
+            <mat-icon>add</mat-icon>
+        </button>
+    </div>
     <div class="tags-container">
         <mat-nav-list>
             <mat-list-item *ngFor="let tag of tags">{{ tag }}</mat-list-item>

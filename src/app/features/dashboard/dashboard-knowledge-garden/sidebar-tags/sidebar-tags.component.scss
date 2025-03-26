@@ -10,13 +10,32 @@
 }
 
 mat-list-item {
-    width: calc(100% - 16px); /* Adjust width to account for horizontal margins */
-    border: 2px solid var(--border-color);
-    border-radius: var(--border-radius-md);
-    box-sizing: border-box;
-    margin: 0 8px 8px 8px; /* Adds 8px gap on left, right, and bottom */
-  }
-  
-  mat-list-item:last-child {
-    margin-bottom: 0; /* Removes bottom margin for the last item */
-  }
+  width: calc(100% - 16px); /* Adjust width to account for horizontal margins */
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-md);
+  box-sizing: border-box;
+  margin: 0 8px 8px 8px; /* Adds 8px gap on left, right, and bottom */
+}
+
+mat-list-item:last-child {
+  margin-bottom: 0; /* Removes bottom margin for the last item */
+}
+
+.top-bar {
+  display: flex;
+  justify-content: space-between; /* Distributes space between the title and button */
+  align-items: center; /* Aligns items vertically */
+  width: calc(100% - 16px); /* Adjust width to account for horizontal margins */
+  margin: 0 8px 8px 8px; /* Adds 8px gap on left, right, and bottom */
+}
+
+h3 {
+  margin: 0; /* Removes default margin */
+  margin-left: 0; /* Ensures no gap on the left */
+  font-size: 1.25rem; /* Adjust font size as needed */
+  color: var(--text-primary-color); /* Optional: Adjust color as needed */
+}
+
+button[mat-icon-button] {
+  color: var(--primary-color); /* Optional: Adjust color as needed */
+}
