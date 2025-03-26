@@ -1,0 +1,25 @@
+.upload-page {
+    background-color: #fdfbee;
+  }
+  
+  .text-container {
+    background-color: red;
+  }
+  
+  .drop-zone {
+    border: 3px dashed #0087F7;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 200px;
+    margin: 20px;
+    text-align: center;
+    cursor: pointer;
+  }
+  
+  .nv-file-over {
+    border: dotted 3px red;
+  } /* Default class applied to drop zones on over */
+  

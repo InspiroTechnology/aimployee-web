@@ -1,0 +1,120 @@
+<div class="upload-page">
+    Multiple
+    <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
+
+    Single
+    <input type="file" ng2FileSelect [uploader]="uploader" />
+
+
+
+
+    <div class="drop-zone" [ngClass]="{'nv-file-over': hasBaseDropZoneOver}" ng2FileDrop
+        (fileOver)="fileOverBase($event)" [uploader]="uploader">
+        <h4>将文件拖拽到此处，本地上传, 云文件</h4>
+        <p>支持文件格式：支持 TXT、 MARKDOWN、 MDX、 PDF、 HTML、 XLSX、 XLS、 DOCX、 CSV、 MD、 HTM，单个文件不超过 15MB</p>
+    </div>
+    <!-- 
+        <div ng2FileDrop [ngClass]="{'another-file-over-class': hasAnotherDropZoneOver}"
+            (fileOver)="fileOverAnother($event)" [uploader]="uploader">
+            Another drop zone
+        </div> -->
+
+    <!-- Multiple
+        <input type="file" ng2FileSelect [uploader]="uploader" multiple /><br />
+
+        Single
+        <input type="file" ng2FileSelect [uploader]="uploader" /> -->
+
+    <div>
+
+        <h3>Upload queue</h3>
+        <p>Queue length: {{ uploader.queue ? uploader.queue.length : 0 }}</p>
+
+        <mat-table [dataSource]="dataSource" class="mat-elevation-z8">
+            <!-- Name Column -->
+            <ng-container matColumnDef="name">
+                <mat-header-cell *matHeaderCellDef> Name </mat-header-cell>
+                <mat-cell *matCellDef="let item"> {{ item?.file?.name }} </mat-cell>
+            </ng-container>
+
+            <!-- Size Column -->
+            <ng-container matColumnDef="size">
+                <mat-header-cell *matHeaderCellDef> Size </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    {{ item?.file?.size / 1024 / 1024 | number: '.2' }} MB
+                </mat-cell>
+            </ng-container>
+
+            <!-- Progress Column -->
+            <ng-container matColumnDef="progress">
+                <mat-header-cell *matHeaderCellDef> Progress </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <mat-progress-bar mode="determinate" [value]="item.progress"></mat-progress-bar>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Status Column -->
+            <ng-container matColumnDef="status">
+                <mat-header-cell *matHeaderCellDef> Status </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <span *ngIf="item.isSuccess">Success</span>
+                    <span *ngIf="item.isCancel">Cancelled</span>
+                    <span *ngIf="item.isError">Error</span>
+                </mat-cell>
+            </ng-container>
+
+            <!-- Actions Column -->
+            <ng-container matColumnDef="actions">
+                <mat-header-cell *matHeaderCellDef> Actions </mat-header-cell>
+                <mat-cell *matCellDef="let item">
+                    <button mat-button (click)="uploadItem(item)"
+                        [disabled]="item.isReady || item.isUploading || item.isSuccess">
+                        Upload
+                    </button>
+                    <button mat-button (click)="cancelItem(item)" [disabled]="!item.isUploading">
+                        Cancel
+                    </button>
+                    <button mat-button (click)="removeItem(item)">
+                        Remove
+                    </button>
+                </mat-cell>
+            </ng-container>
+
+            <mat-header-row *matHeaderRowDef="displayedColumns"></mat-header-row>
+            <mat-row *matRowDef="let row; columns: displayedColumns;"></mat-row>
+        </mat-table>
+
+        <div>
+            <div>
+                Queue progress:
+                <mat-progress-bar mode="determinate" [value]="uploader.progress"></mat-progress-bar>
+            </div>
+            <button mat-raised-button color="primary" (click)="uploader.uploadAll()"
+                [disabled]="!uploader.getNotUploadedItems().length">
+                <mat-icon>cloud_upload</mat-icon> Upload all
+            </button>
+            <button mat-raised-button color="warn" (click)="uploader.cancelAll()" [disabled]="!uploader.isUploading">
+                <mat-icon>cancel</mat-icon> Cancel all
+            </button>
+            <button mat-raised-button color="accent" (click)="uploader.clearQueue()"
+                [disabled]="!uploader.queue.length">
+                <mat-icon>delete</mat-icon> Remove all
+            </button>
+        </div>
+
+    </div>
+
+
+    <br><br>
+
+    <!-- <div>
+        <div>
+            <div>
+                <div>Response</div>
+                <div>
+                    {{ response }}
+                </div>
+            </div>
+        </div>
+    </div> -->
+</div>

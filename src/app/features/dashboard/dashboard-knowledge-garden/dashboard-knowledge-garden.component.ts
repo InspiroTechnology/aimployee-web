@@ -5,11 +5,12 @@ import { NewFlowChatComponent } from '../../chat/new-flow-chat/new-flow-chat.com
 import { UploadPageComponent } from '../../upload/upload-page/upload-page.component';
 import { UploadService } from '../../../services/upload.service';
 import { SidebarTagsComponent } from './sidebar-tags/sidebar-tags.component';
+import { SingleFileUploadComponent } from '../../upload/single-file-upload/single-file-upload.component';
 
 @Component({
   selector: 'app-dashboard-knowledge-garden',
   standalone: true,
-  imports: [CommonModule, NewFlowChatComponent, UploadPageComponent,SidebarTagsComponent],
+  imports: [CommonModule, NewFlowChatComponent, UploadPageComponent,SidebarTagsComponent,SingleFileUploadComponent],
   templateUrl: './dashboard-knowledge-garden.component.html',
   styleUrls: ['./dashboard-knowledge-garden.component.scss'],
 })
