@@ -23,7 +23,11 @@ export class KnoledegeListComponent implements OnInit, OnDestroy {
   constructor(
     private knowledgeGardenService: KnowledgeGardenService,
     public tagService: TagService
-  ) {}
+  ) {
+    this.knowledgeGardenService.triggerObservable.subscribe(() => {
+      this.loadKnowledge();
+    });
+  }
 
   ngOnInit(): void {
     this.loadKnowledge();

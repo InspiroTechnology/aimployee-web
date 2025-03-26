@@ -1,12 +1,22 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, Subject } from 'rxjs';
 import { ApiService } from './api.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class KnowledgeGardenService {
+  private trigger$ = new Subject<void>();
+
   constructor(private apiService: ApiService) {}
+
+  get triggerObservable() {
+    return this.trigger$.asObservable();
+  }
+
+  triggerKnowledgeUpdate() {
+    this.trigger$.next();
+  }
 
   getKnowledgeByUserId(userId: number): Observable<any> {
     return this.apiService.get('api/knowledge/config/get', { userId });

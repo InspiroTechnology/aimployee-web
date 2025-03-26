@@ -26,10 +26,14 @@ export class DashboardKnowledgeGardenComponent implements OnInit {
 
   constructor(
     private uploadService: UploadService, // Inject UploadService
-    private tagService: TagService // Inject TagService
-  ) {}
+    private tagService: TagService, // Inject TagService
+    public knowledgeGardenService: KnowledgeGardenService
+  ) {
+    
+  }
 
   ngOnInit(): void {
+    
   }
 
 
@@ -46,6 +50,8 @@ export class DashboardKnowledgeGardenComponent implements OnInit {
       .subscribe({
         next: (response) => {
           console.log('File uploaded successfully:', response);
+          this.knowledgeGardenService.triggerKnowledgeUpdate();
+          
         },
         error: (error) => {
           console.error('Error uploading file:', error);
