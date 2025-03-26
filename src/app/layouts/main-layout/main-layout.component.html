@@ -1,11 +1,14 @@
-<div class="main-layout">
-  <div class="sidebar" [class.hidden]="!layoutService.isSidebarOpen">
-    <app-sidebar [class.closed]="!layoutService.isSidebarOpen"></app-sidebar>
-  </div>
-  <div class="content">
-    <app-header class="content-header "></app-header>
-    <div class="content-body">
+<div class="home-layout">
+
+  <app-header class="header"></app-header>
+
+  <main class="main-content">
+
+    <div class="sidebar" [class.hidden]="!layoutService.isSidebarOpen">
+      <app-sidebar [class.closed]="!layoutService.isSidebarOpen"></app-sidebar>
+    </div>
+    <div class="content">
       <router-outlet></router-outlet>
     </div>
-  </div>
+  </main>
 </div>

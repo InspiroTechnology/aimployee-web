@@ -1,43 +1,40 @@
-.main-layout {
+.home-layout {
   display: flex;
-  height: calc(100vh - 16px); // Subtract the border size (3px top + 3px bottom)
+  flex-direction: column;
+  height: 100vh;
+}
+
+.header {
+  height: 64px;
+  flex-shrink: 0;
+}
+
+.main-content {
+  display: flex;
+  flex: 1; // take up remaining space after header
+  overflow: hidden; // prevent scrollbars from appearing unnecessarily
+  height: calc(100vh - 64px); // Remaining height after header
   box-sizing: border-box; // Include border in the total height and width
   border: 3px solid var(--border-color); // Example border
   border-radius: var(--border-radius-sm);
-  // margin: 8px;
+  margin-bottom: 5px;
+}
 
-  .sidebar {
-    width: 280px;
-    flex-shrink: 0; // Prevent shrinking
-    transition: transform 0.3s ease; // Smooth transition for hiding
-  }
+.sidebar {
+  width: 180px;
+  flex-shrink: 0; // Prevent shrinking
+  transition: transform 0.3s ease; // Smooth transition for hiding
+}
+.sidebar.hidden {
+  transform: translateX(-100%); // Move sidebar out of view
+  width: 0; // Set width to 0 when hidden
+  visibility: hidden; // Ensure it's not interactable
+}
 
-  .sidebar.hidden {
-    transform: translateX(-100%); // Move sidebar out of view
-    width: 0; // Set width to 0 when hidden
-    visibility: hidden; // Ensure it's not interactable
-  }
-
-  .sidebar.hidden + .content {
-    flex: 0 0 100%; // Take up the full width when the sidebar is hidden
-  }
-
-  .content {
-    display: flex;
-    flex-direction: column; // Stack children vertically
-    flex: 1; // Take up the remaining space
-    overflow: hidden; // Prevent overflow
-    box-sizing: border-box; // Include border in the total height and width
-    border: 1px solid var(--border-color); // Example border
-    border-radius: 8px;
-    margin: 5px;
-  }
-  .content-header {
-    flex-shrink: 0; // Prevent shrinking
-  }
-
-  .content-body {
-    flex: 1; // Take up the remaining space
-    overflow-y: auto; // Enable scrolling for overflowing content
-  }
+.content-area {
+  flex: 1;
+  background-color: #ffffff;
+  padding: 16px;
+  overflow-y: auto; // scrollable content
+  box-sizing: border-box;
 }
