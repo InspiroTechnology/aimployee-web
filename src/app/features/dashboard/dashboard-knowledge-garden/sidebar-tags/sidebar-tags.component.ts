@@ -1,11 +1,14 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TagService } from '../../../../services/tag.service';
+import { MatIconModule } from '@angular/material/icon';
+import { MatButtonModule } from '@angular/material/button';
+import { MatListModule } from '@angular/material/list';
 
 @Component({
   selector: 'app-sidebar-tags',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule,MatIconModule, MatButtonModule, MatListModule],
   templateUrl: './sidebar-tags.component.html',
   styleUrls: ['./sidebar-tags.component.scss'],
 })

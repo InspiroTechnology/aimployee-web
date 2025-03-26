@@ -1,6 +1,7 @@
-<div>
-    <h3>Suggested Tags</h3>
-    <ul>
-        <li *ngFor="let tag of tags">{{ tag }}</li>
-    </ul>
+<div class="flex-container">
+    <div class="tags-container">
+        <mat-nav-list>
+            <mat-list-item *ngFor="let tag of tags">{{ tag }}</mat-list-item>
+        </mat-nav-list>
+    </div>
 </div>
