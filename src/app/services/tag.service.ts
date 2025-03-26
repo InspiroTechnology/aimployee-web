@@ -12,7 +12,12 @@ export class TagService {
    * @param fileId The ID of the uploaded file
    */
   getSuggestedTags(fileId: string): Observable<string[]> {
-    const fakeTags = ['AI', 'Machine Learning', 'Data Science'];
+    const fakeTags = [ '项目',
+      '产品',
+      '运营',
+      '目标',
+      '绩效',
+      '资源分配'];
     return of(fakeTags);
   }
 
