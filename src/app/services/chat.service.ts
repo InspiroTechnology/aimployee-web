@@ -13,59 +13,62 @@ export class ChatService {
   ) {}
 
   streamChat(payload: any, apiKey: string): Observable<string> {
-    const apiUrl = 'api/v1/llm/chat/messages'; // Define apiUrl here
+    //apiService.baseUrl
+    console.log(this.apiService.baseUrl);
+    const apiUrl =this.apiService.baseUrl + 'api/v1/llm/chat/messages'; // Define apiUrl here
+
+
     return new Observable<string>((observer) => {
       const token = this.tokenStorageService.getToken(); // Retrieve token dynamically
 
-      this.apiService
-        .post(apiUrl, payload, {
-          headers: {
-            'Content-Type': 'application/json',
-            'X-API-Key': apiKey,
-            token: token || '', // Use the retrieved token or an empty string
-          },
-        })
-        .subscribe({
-          next: (response: any) => {
-            const reader = response.body?.getReader();
-            const decoder = new TextDecoder('utf-8');
-            let buffer = '';
-
-            const processStream = async () => {
-              while (true) {
-                const { done, value } = await reader!.read();
-                if (done) {
-                  observer.complete();
-                  break;
-                }
-
-                buffer += decoder.decode(value, { stream: true });
-                const lines = buffer
-                  .split('\n')
-                  .filter((line) => line.trim() !== '');
-
-                for (const line of lines) {
-                  try {
-                    if (line.startsWith('data:')) {
-                      const cleanedLine = line.replace(/^data:\s*/, '');
-                      const json = JSON.parse(cleanedLine);
-
-                      if (json.event === 'message' && json.answer) {
-                        observer.next(json.answer); // 一段段推送回答
-                      }
+      fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-API-Key': apiKey,
+          token: token || '',
+        },
+        body: JSON.stringify(payload),
+      })
+        .then((response) => {
+          const reader = response.body?.getReader();
+          const decoder = new TextDecoder('utf-8');
+          let buffer = '';
+      
+          const processStream = async () => {
+            while (true) {
+              const { done, value } = await reader!.read();
+              if (done) break;
+      
+              buffer += decoder.decode(value, { stream: true });
+              const lines = buffer
+                .split('\n')
+                .filter((line) => line.trim() !== '');
+      
+              for (const line of lines) {
+                try {
+                  if (line.startsWith('data:')) {
+                    const cleanedLine = line.replace(/^data:\s*/, '');
+                    const json = JSON.parse(cleanedLine);
+      
+                    if (json.event === 'message' && json.answer) {
+                      console.log('推送数据:', json.answer);
+                      // 在这里更新 UI，比如传回 Observable 或 EventEmitter
                     }
-                  } catch (err) {
-                    console.warn('无法解析：', line);
                   }
+                } catch (err) {
+                  console.warn('解析失败:', line);
                 }
-
-                buffer = '';
               }
-            };
-
-            processStream().catch((error) => observer.error(error));
-          },
-          error: (error) => observer.error(error),
+      
+              buffer = '';
+            }
+          };
+      
+          processStream();
+        })
+        .catch((err) => {
+          console.error('fetch 错误:', err);
         });
     });
   }
