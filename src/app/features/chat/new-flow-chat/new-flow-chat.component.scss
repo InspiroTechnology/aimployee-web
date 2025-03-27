@@ -22,3 +22,13 @@
   padding: 0.5rem 0;
   flex: 0 0 auto; /* Normal height */
 }
+
+.chat-output {
+  padding: 1rem;
+  background-color: #f9f9f9;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  margin-top: 1rem;
+  white-space: pre-wrap;
+  font-family: monospace;
+}
