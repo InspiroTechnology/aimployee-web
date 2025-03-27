@@ -22,7 +22,7 @@ export class NewFlowChatComponent implements OnInit {
 
   ngOnInit(): void {
     const apiKey = 'e05ff68818ab4d2a8a28a01662cb8290';
-    const payload = { responseMode: 'streaming', query: '怎么评价新西兰？' };
+    const payload = { responseMode: 'streaming', query: '怎么评价新西兰？你用少于100字给我答案' };
 
     this.chatService.streamChat(payload, apiKey).subscribe({
       next: (text) => (this.fullAnswer += text),
