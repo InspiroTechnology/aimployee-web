@@ -5,7 +5,12 @@ import { provideHttpClient, withFetch, withInterceptors } from '@angular/common/
 import { provideAnimations } from '@angular/platform-browser/animations';
 import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { authInterceptor } from './interceptors/auth.interceptor';
+import { provideMarkdown } from 'ngx-markdown';
 
+import 'prismjs';
+import 'prismjs/components/prism-typescript.min.js';
+import 'prismjs/plugins/line-numbers/prism-line-numbers.js';
+import 'prismjs/plugins/line-highlight/prism-line-highlight.js';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -14,6 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimations(),
     provideHttpClient(
       withInterceptors([authInterceptor]) // ✅ 正确注册 JWT 拦截器
-    )
+    ),
+    provideMarkdown()
   ]
 }

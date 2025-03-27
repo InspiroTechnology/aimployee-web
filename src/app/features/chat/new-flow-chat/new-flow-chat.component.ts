@@ -7,6 +7,7 @@ import { ChatInputComponent } from '../chat-input/chat-input.component';
 import { ChatSettingsComponent } from '../chat-settings/chat-settings.component';
 import { ChatService } from '../../../services/chat.service';
 import { TokenStorageService } from '../../../services/token-storage.service';
+import { MarkdownComponent } from 'ngx-markdown';
 
 @Component({
   selector: 'app-new-flow-chat',
@@ -16,8 +17,7 @@ import { TokenStorageService } from '../../../services/token-storage.service';
     FormsModule, // Add FormsModule
     MatFormFieldModule, // Add Angular Material Form Field
     MatInputModule, // Add Angular Material Input
-    ChatInputComponent,
-    ChatSettingsComponent,
+    MarkdownComponent
   ],
   templateUrl: './new-flow-chat.component.html',
   styleUrls: ['./new-flow-chat.component.scss'],
