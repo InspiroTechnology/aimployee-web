@@ -15,8 +15,7 @@ export class ChatService {
   streamChat(payload: any, apiKey: string): Observable<string> {
     //apiService.baseUrl
     console.log(this.apiService.baseUrl);
-    const apiUrl =this.apiService.baseUrl + 'api/v1/llm/chat/messages'; // Define apiUrl here
-
+    const apiUrl = this.apiService.baseUrl + 'api/v1/llm/chat/messages'; // Define apiUrl here
 
     return new Observable<string>((observer) => {
       const token = this.tokenStorageService.getToken(); // Retrieve token dynamically
@@ -34,38 +33,41 @@ export class ChatService {
           const reader = response.body?.getReader();
           const decoder = new TextDecoder('utf-8');
           let buffer = '';
-      
+
           const processStream = async () => {
             while (true) {
               const { done, value } = await reader!.read();
               if (done) break;
-      
+
               buffer += decoder.decode(value, { stream: true });
               const lines = buffer
                 .split('\n')
                 .filter((line) => line.trim() !== '');
-      
+
               for (const line of lines) {
                 try {
                   if (line.startsWith('data:')) {
                     const cleanedLine = line.replace(/^data:\s*/, '');
                     const json = JSON.parse(cleanedLine);
-      
+
                     if (json.event === 'message' && json.answer) {
-                      console.log('推送数据:', json.answer);
+                      // console.log('推送数据:', json.answer);
                       // 在这里更新 UI，比如传回 Observable 或 EventEmitter
                       observer.next(json.answer);
+                    } else if (json.event === 'message_end' && json.metadata) {
+                      console.log('消息结束，元数据:', json.metadata);
+                      observer.complete();
                     }
                   }
                 } catch (err) {
                   console.warn('解析失败:', line);
                 }
               }
-      
+
               buffer = '';
             }
           };
-      
+
           processStream();
         })
         .catch((err) => {
