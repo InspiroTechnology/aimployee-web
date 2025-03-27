@@ -54,6 +54,7 @@ export class ChatService {
                     if (json.event === 'message' && json.answer) {
                       console.log('推送数据:', json.answer);
                       // 在这里更新 UI，比如传回 Observable 或 EventEmitter
+                      observer.next(json.answer);
                     }
                   }
                 } catch (err) {
