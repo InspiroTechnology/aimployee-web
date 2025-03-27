@@ -7,6 +7,8 @@ import { TokenStorageService } from './token-storage.service';
   providedIn: 'root',
 })
 export class ChatService {
+  public conversationId: string | null = null; // Add a property to store conversation_id
+
   constructor(
     private tokenStorageService: TokenStorageService, // Inject TokenStorageService
     private apiService: ApiService // Inject ApiService
@@ -51,8 +53,10 @@ export class ChatService {
                     const json = JSON.parse(cleanedLine);
 
                     if (json.event === 'message' && json.answer) {
-                      // console.log('推送数据:', json.answer);
-                      // 在这里更新 UI，比如传回 Observable 或 EventEmitter
+                      // Save conversation_id if present
+                      if (json.conversation_id) {
+                        this.conversationId = json.conversation_id;
+                      }
                       observer.next(json.answer);
                     } else if (json.event === 'message_end' && json.metadata) {
                       console.log('消息结束，元数据:', json.metadata);
@@ -74,5 +78,9 @@ export class ChatService {
           console.error('fetch 错误:', err);
         });
     });
+  }
+
+  getConversationId(): string | null {
+    return this.conversationId; // Add a method to retrieve the conversation_id
   }
 }
