@@ -28,7 +28,24 @@ export class NewFlowChatComponent implements OnInit {
   apiKey = 'e05ff68818ab4d2a8a28a01662cb8290';
 
   payload = { responseMode: 'streaming', query: '' }; // Two-way bind query
-
+  markdown = `## Markdown __rulez__!
+  ---
+  
+  ### Syntax highlight
+  \`\`\`typescript
+  const language = 'typescript';
+  \`\`\`
+  
+  ### Lists
+  1. Ordered list
+  2. Another bullet point
+     - Unordered list
+     - Another unordered bullet
+  
+  ### Blockquote
+  > Blockquote to the max`;
+  
+  
   constructor(
     private chatService: ChatService, // Use ChatService
     private tokenStorageService: TokenStorageService // Inject TokenStorageService
