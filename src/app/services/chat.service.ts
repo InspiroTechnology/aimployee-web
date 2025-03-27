@@ -51,16 +51,21 @@ export class ChatService {
                 .filter((line) => line.trim() !== '');
 
               for (const line of lines) {
+                // console.log('line:', line);
+                
                 try {
                   if (line.startsWith('data:')) {
+                    
                     const cleanedLine = line.replace(/^data:\s*/, '');
+
+                    
                     const json = JSON.parse(cleanedLine);
 
                     if (json.event === 'message' && json.answer) {
                       // Save conversation_id if present
-                      if (json.conversation_id) {
-                        this.conversationId = json.conversation_id;
-                      }
+                      // if (json.conversation_id) {
+                      //   this.conversationId = json.conversation_id;
+                      // }
                       observer.next(json.answer);
                     } else if (json.event === 'message_end' && json.metadata) {
                       console.log('消息结束，元数据:', json.metadata);
