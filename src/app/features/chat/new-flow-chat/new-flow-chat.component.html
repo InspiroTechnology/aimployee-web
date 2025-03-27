@@ -1,7 +1,19 @@
 <!-- <div class="chat-box" [innerHTML]="fullAnswer"></div> -->
 
+<div class="payload-input">
+  <mat-form-field appearance="fill">
+    <mat-label>Enter your query</mat-label>
+    <input matInput [(ngModel)]="payload.query" placeholder="Type your query here">
+  </mat-form-field>
+  <button mat-raised-button color="primary" (click)="sendQuery()">Send</button>
+</div>
+
 <div class="chat-output">
   <p>{{ fullAnswer }}</p>
+</div>
+
+<div class="reset-conversation">
+  <button mat-raised-button color="warn" (click)="resetConversation()">Reset Conversation</button>
 </div>
 
 <!-- <div class="new-flow-chat-container">
