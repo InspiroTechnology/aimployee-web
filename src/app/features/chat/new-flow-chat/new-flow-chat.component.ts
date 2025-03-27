@@ -49,6 +49,11 @@ export class NewFlowChatComponent implements OnInit {
     }
   }
 
+  resetConversation(): void {
+    this.chatService.conversationId = null; // Reset conversationId
+    console.log('Conversation ID has been reset.');
+  }
+
   private startChatStream(
     payload: { responseMode: string; query: string },
     apiKey: string
