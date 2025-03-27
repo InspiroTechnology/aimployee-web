@@ -19,9 +19,9 @@ export class ChatService {
     console.log(this.apiService.baseUrl);
     const apiUrl = this.apiService.baseUrl + 'api/v1/llm/chat/messages'; // Define apiUrl here
 
-    if (this.conversationId) {
-      payload.conversation_id = this.conversationId; // Include conversationId if it exists
-    }
+    // if (this.conversationId) {
+    //   payload.conversation_id = this.conversationId; // Include conversationId if it exists
+    // }
 
     return new Observable<string>((observer) => {
       const token = this.tokenStorageService.getToken(); // Retrieve token dynamically
