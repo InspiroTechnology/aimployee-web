@@ -8,6 +8,7 @@ import { ChatSettingsComponent } from '../chat-settings/chat-settings.component'
 import { ChatService } from '../../../services/chat.service';
 import { TokenStorageService } from '../../../services/token-storage.service';
 import { MarkdownComponent } from 'ngx-markdown';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-new-flow-chat',
@@ -17,7 +18,7 @@ import { MarkdownComponent } from 'ngx-markdown';
     FormsModule, // Add FormsModule
     MatFormFieldModule, // Add Angular Material Form Field
     MatInputModule, // Add Angular Material Input
-    MarkdownComponent
+    MarkdownComponent,
   ],
   templateUrl: './new-flow-chat.component.html',
   styleUrls: ['./new-flow-chat.component.scss'],
@@ -25,7 +26,7 @@ import { MarkdownComponent } from 'ngx-markdown';
 export class NewFlowChatComponent implements OnInit {
   fullAnswer = '';
   // apiKey = '';
-  apiKey = 'e05ff68818ab4d2a8a28a01662cb8290';
+  apiKey = environment.apiKey; // Use apiKey from environment
 
   payload = { responseMode: 'streaming', query: '' }; // Two-way bind query
   markdown = `## Markdown __rulez__!
@@ -44,8 +45,7 @@ export class NewFlowChatComponent implements OnInit {
   
   ### Blockquote
   > Blockquote to the max`;
-  
-  
+
   constructor(
     private chatService: ChatService, // Use ChatService
     private tokenStorageService: TokenStorageService // Inject TokenStorageService
