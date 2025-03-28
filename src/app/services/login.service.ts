@@ -18,7 +18,7 @@ export class LoginService {
       next: (response) => {
         console.log('Login successful:', response);
         this.tokenStorage.saveToken(response.data.token); // Use TokenStorageService to save token
-        this.router.navigate(['/dashboard']); // Navigate to dashboard on success
+        this.router.navigate(['/knowledge-garden']); // Navigate to dashboard on success
       },
       error: (error) => {
         console.error('Login failed:', error);
