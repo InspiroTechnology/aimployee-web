@@ -1,27 +1,31 @@
-<div>
-    <h2>Knowledge Garden</h2>
-    <div class="knowledge-cards mat-grid-list">
-        <mat-grid-list cols="5" rowHeight="1:1">
-            <mat-grid-tile *ngFor="let knowledge of knowledgeData">
-                <div class="knowledge-card">
-                    <h3>{{ knowledge.fileName || 'Untitled' }}</h3>
-                    <p *ngIf="knowledge.fileSizeKb">Size: {{ knowledge.fileSizeKb }} KB</p>
-                    <p *ngIf="knowledge.createTime">Created: {{ knowledge.createTime | date:'medium' }}</p>
-                    <p *ngIf="knowledge.updateTime">Last Updated: {{ knowledge.updateTime | date:'medium' }}</p>
-                    <p *ngIf="Array.isArray(knowledge.tags)">Tags: {{ knowledge.tags.join(', ') }}</p>
-                    <p *ngIf="knowledge.type">Type: {{ knowledge.type }}</p>
-                </div>
-            </mat-grid-tile>
-        </mat-grid-list>
+<div class="knowledge-garden-container">
+
+</div>
+
+<!-- <div>
+        <h2>Knowledge Garden</h2>
+        <div class="knowledge-cards mat-grid-list">
+            <mat-grid-list cols="5" rowHeight="1:1">
+                <mat-grid-tile *ngFor="let knowledge of knowledgeData">
+                    <div class="knowledge-card">
+                        <h3>{{ knowledge.fileName || 'Untitled' }}</h3>
+                        <p *ngIf="knowledge.fileSizeKb">Size: {{ knowledge.fileSizeKb }} KB</p>
+                        <p *ngIf="knowledge.createTime">Created: {{ knowledge.createTime | date:'medium' }}</p>
+                        <p *ngIf="knowledge.updateTime">Last Updated: {{ knowledge.updateTime | date:'medium' }}</p>
+                        <p *ngIf="Array.isArray(knowledge.tags)">Tags: {{ knowledge.tags.join(', ') }}</p>
+                        <p *ngIf="knowledge.type">Type: {{ knowledge.type }}</p>
+                    </div>
+                </mat-grid-tile>
+            </mat-grid-list>
+        </div>
+        <div *ngIf="totalRecords === 0">No records found.</div>
     </div>
-    <div *ngIf="totalRecords === 0">No records found.</div>
-</div>
-<div *ngIf="totalRecords > 0" class="pagination-controls">
-    <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
-        Previous
-    </button>
-    <span>Page {{ currentPage }} of {{ Math.ceil(totalRecords / pageSize) }}</span>
-    <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage >= Math.ceil(totalRecords / pageSize)">
-        Next
-    </button>
-</div>
+    <div *ngIf="totalRecords > 0" class="pagination-controls">
+        <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
+            Previous
+        </button>
+        <span>Page {{ currentPage }} of {{ Math.ceil(totalRecords / pageSize) }}</span>
+        <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage >= Math.ceil(totalRecords / pageSize)">
+            Next
+        </button>
+    </div> -->
