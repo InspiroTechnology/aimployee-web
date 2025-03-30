@@ -7,6 +7,7 @@ import { SidebarTagsComponent } from './sidebar-tags/sidebar-tags.component';
 import { SingleFileUploadComponent } from '../../upload/single-file-upload/single-file-upload.component';
 import { TagService } from '../../../services/tag.service';
 import { KnoledegeListComponent } from './knoledege-list/knoledege-list.component';
+import { KnowledgeChatComponent } from '../../chat/knowledge-chat/knowledge-chat.component';
 
 @Component({
   selector: 'app-dashboard-knowledge-garden',
@@ -16,7 +17,8 @@ import { KnoledegeListComponent } from './knoledege-list/knoledege-list.componen
     NewFlowChatComponent,
     SidebarTagsComponent,
     SingleFileUploadComponent,
-    KnoledegeListComponent
+    KnoledegeListComponent,
+    KnowledgeChatComponent
   ],
   templateUrl: './dashboard-knowledge-garden.component.html',
   styleUrls: ['./dashboard-knowledge-garden.component.scss'],
