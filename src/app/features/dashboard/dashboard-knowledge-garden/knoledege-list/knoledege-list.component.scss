@@ -19,6 +19,8 @@
   grid-template-columns: repeat(5, 1fr);
   grid-template-rows: repeat(2, auto);
   gap: 16px;
+  padding: 8px; // Add padding to create space around the grid
+
 }
 
 // .card {
