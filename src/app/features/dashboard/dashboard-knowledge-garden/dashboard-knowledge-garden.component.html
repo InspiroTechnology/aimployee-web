@@ -1,20 +1,20 @@
 <div class="layout">
     <!-- Sidebar content -->
-    <app-sidebar-tags class="sidebar"></app-sidebar-tags>
+    <app-sidebar-tags class="sidebar box"></app-sidebar-tags>
     <div class="container">
-        <div class="top">
-            <div class="left">
+        <div class="top ">
+            <div class="left box">
                 <!-- Content for the left section -->
                 <app-knowledge-chat (messageSent)="handleMessage($event)"></app-knowledge-chat>
             </div>
-            <div class="right">
+            <div class="right box">
 
                 <app-single-file-upload (uploadFile)="uploadFileThroughService($event)"></app-single-file-upload>
             </div>
         </div>
-        <div class="bottom">
+        <div class="bottom box">
 
-<app-knoledege-list></app-knoledege-list>
+            <app-knoledege-list></app-knoledege-list>
         </div>
     </div>
 </div>

@@ -18,27 +18,19 @@ import { KnowledgeChatComponent } from '../../chat/knowledge-chat/knowledge-chat
     SidebarTagsComponent,
     SingleFileUploadComponent,
     KnoledegeListComponent,
-    KnowledgeChatComponent
+    KnowledgeChatComponent,
   ],
   templateUrl: './dashboard-knowledge-garden.component.html',
   styleUrls: ['./dashboard-knowledge-garden.component.scss'],
 })
 export class DashboardKnowledgeGardenComponent implements OnInit {
-  
-
   constructor(
     private uploadService: UploadService, // Inject UploadService
     private tagService: TagService, // Inject TagService
     public knowledgeGardenService: KnowledgeGardenService
-  ) {
-    
-  }
+  ) {}
 
-  ngOnInit(): void {
-    
-  }
-
-
+  ngOnInit(): void {}
 
   uploadFileThroughService(file: File): void {
     // Get tags from TagService
@@ -53,7 +45,6 @@ export class DashboardKnowledgeGardenComponent implements OnInit {
         next: (response) => {
           console.log('File uploaded successfully:', response);
           this.knowledgeGardenService.triggerKnowledgeUpdate();
-          
         },
         error: (error) => {
           console.error('Error uploading file:', error);

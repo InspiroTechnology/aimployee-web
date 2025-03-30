@@ -12,6 +12,13 @@
   display: flex;
   align-items: start;
   justify-content: start;
+  // margin: 0.5rem;
+  // border-radius: var(--border-radius-sm);
+  // border: 2px solid var(--border-color);
+  // box-sizing: border-box;
+}
+
+.box{
   margin: 0.5rem;
   border-radius: var(--border-radius-sm);
   border: 2px solid var(--border-color);
