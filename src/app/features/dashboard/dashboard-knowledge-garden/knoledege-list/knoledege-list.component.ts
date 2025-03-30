@@ -10,7 +10,13 @@ import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 @Component({
   selector: 'app-knoledege-list',
   standalone: true,
-  imports: [CommonModule, MatGridListModule, NgFor, MatCardModule, MatPaginatorModule],
+  imports: [
+    CommonModule,
+    MatGridListModule,
+    NgFor,
+    MatCardModule,
+    MatPaginatorModule,
+  ],
   templateUrl: './knoledege-list.component.html',
   styleUrls: ['./knoledege-list.component.scss'],
 })
@@ -22,14 +28,6 @@ export class KnoledegeListComponent implements OnInit, OnDestroy {
   Math = Math; // Expose Math object for use in the template
   Array = Array; // Expose Array object for use in the template
 
-  allCards = Array.from({ length: 50 }, (_, i) => ({
-    title: `Card ${i + 1}`,
-    content: `This is the content of card ${i + 1}`
-  }));
-  pagedCards = this.allCards.slice(0, 10);
-  totalCards = this.allCards.length;
-
-  
   private tagSubscription: Subscription | null = null;
 
   constructor(
@@ -54,12 +52,6 @@ export class KnoledegeListComponent implements OnInit, OnDestroy {
     }
   }
 
-  onPageChange(event: PageEvent): void {
-    const start = event.pageIndex * event.pageSize;
-    const end = start + event.pageSize;
-    this.pagedCards = this.allCards.slice(start, end);
-  }
-
   loadKnowledge(): void {
     const tags = this.tagService.getSelectedTag()
       ? [this.tagService.getSelectedTag()]
@@ -80,13 +72,14 @@ export class KnoledegeListComponent implements OnInit, OnDestroy {
       });
   }
 
-  // onPageChange(newPage: number): void {
-  //   if (
-  //     newPage > 0 &&
-  //     newPage <= Math.ceil(this.totalRecords / this.pageSize)
-  //   ) {
-  //     this.currentPage = newPage;
-  //     this.loadKnowledge();
-  //   }
-  // }
+  onPageChange(event: number | PageEvent): void {
+    const newPage = typeof event === 'number' ? event : event.pageIndex + 1;
+    if (
+      newPage > 0 &&
+      newPage <= Math.ceil(this.totalRecords / this.pageSize)
+    ) {
+      this.currentPage = newPage;
+      this.loadKnowledge();
+    }
+  }
 }

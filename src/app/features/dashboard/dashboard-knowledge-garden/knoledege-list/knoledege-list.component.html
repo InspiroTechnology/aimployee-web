@@ -1,61 +1,36 @@
-<!-- <div class="knowledge-garden-container">
-
-</div> -->
 <div class="container">
     <!-- Header -->
-     <div  class="header">
+    <div class="header">
         <h2>Knowledge Garden</h2>
+    </div>
 
-     </div>
-
-    <!-- Cards Grid: 2 rows × 5 columns -->
+    <!-- Cards Grid: Dynamically generated -->
     <div class="card-grid">
-        <!-- <p>dd</p> -->
-      <mat-card *ngFor="let card of pagedCards" class="card">
-        <mat-card-title>{{ card.title }}</mat-card-title>
-        <mat-card-content>{{ card.content }}</mat-card-content>
-      </mat-card>
+        <mat-card *ngFor="let knowledge of knowledgeData" class="card">
+            <!-- <mat-card-title>{{ knowledge.fileName || 'Untitled' }}</mat-card-title> -->
+            <mat-card-content>
+                <!-- show title -->
+                <p *ngIf="knowledge.fileName">
+                    {{ knowledge.fileName || 'Untitled' }}
+                </p>
+                <!-- summary -->
+                <p *ngIf="knowledge.summary">
+                    {{ knowledge.summary }}
+                </p>
+
+                <!-- <p *ngIf="knowledge.fileSizeKb">Size: {{ knowledge.fileSizeKb }} KB</p> -->
+                <p *ngIf="knowledge.createTime">Created: {{ knowledge.createTime | date:'medium' }}</p>
+                <!-- <p *ngIf="knowledge.updateTime">Last Updated: {{ knowledge.updateTime | date:'medium' }}</p> -->
+                <!-- <p *ngIf="Array.isArray(knowledge.tags)">Tags: {{ knowledge.tags.join(', ') }}</p> -->
+                <!-- <p *ngIf="knowledge.type">Type: {{ knowledge.type }}</p> -->
+            </mat-card-content>
+        </mat-card>
     </div>
 
     <!-- Pagination -->
     <div class="pagination-controls">
-      <mat-paginator [length]="totalCards"
-                     [pageSize]="10"
-                     [pageSizeOptions]="[10]"
-                     (page)="onPageChange($event)">
-      </mat-paginator>
+        <mat-paginator [length]="totalRecords" [pageSize]="pageSize" [pageSizeOptions]="[10]"
+            (page)="onPageChange($event.pageIndex + 1)">
+        </mat-paginator>
     </div>
-    <!-- <mat-paginator  [length]="totalCards"
-                   [pageSize]="10"
-                   [pageSizeOptions]="[10]"
-                   (page)="onPageChange($event)">
-    </mat-paginator> -->
-  </div>
-
-<!-- <div>
-        <h2>Knowledge Garden</h2>
-        <div class="knowledge-cards mat-grid-list">
-            <mat-grid-list cols="5" rowHeight="1:1">
-                <mat-grid-tile *ngFor="let knowledge of knowledgeData">
-                    <div class="knowledge-card">
-                        <h3>{{ knowledge.fileName || 'Untitled' }}</h3>
-                        <p *ngIf="knowledge.fileSizeKb">Size: {{ knowledge.fileSizeKb }} KB</p>
-                        <p *ngIf="knowledge.createTime">Created: {{ knowledge.createTime | date:'medium' }}</p>
-                        <p *ngIf="knowledge.updateTime">Last Updated: {{ knowledge.updateTime | date:'medium' }}</p>
-                        <p *ngIf="Array.isArray(knowledge.tags)">Tags: {{ knowledge.tags.join(', ') }}</p>
-                        <p *ngIf="knowledge.type">Type: {{ knowledge.type }}</p>
-                    </div>
-                </mat-grid-tile>
-            </mat-grid-list>
-        </div>
-        <div *ngIf="totalRecords === 0">No records found.</div>
-    </div>
-    <div *ngIf="totalRecords > 0" class="pagination-controls">
-        <button (click)="onPageChange(currentPage - 1)" [disabled]="currentPage === 1">
-            Previous
-        </button>
-        <span>Page {{ currentPage }} of {{ Math.ceil(totalRecords / pageSize) }}</span>
-        <button (click)="onPageChange(currentPage + 1)" [disabled]="currentPage >= Math.ceil(totalRecords / pageSize)">
-            Next
-        </button>
-    </div> -->
+</div>

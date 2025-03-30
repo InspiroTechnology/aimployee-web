@@ -12,20 +12,22 @@
 }
 
 .card-grid {
-  //   border: 1px rgb(186, 97, 37) solid;
   flex-grow: 1; // Take up the remaining space
-
   display: grid;
-  grid-template-columns: repeat(5, 1fr);
-  grid-template-rows: repeat(2, auto);
+  grid-template-columns: repeat(5, 1fr); // 5 columns
+  grid-auto-rows: 1fr; // Make rows flexible and proportional
   gap: 16px;
   padding: 8px; // Add padding to create space around the grid
-
 }
 
-// .card {
-//   height: 150px;
-// }
+.card {
+  width: 100%; // Take full width of the grid cell
+  height: 100%; // Take full height of the grid cell
+  overflow: hidden; // Prevent content overflow
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
 
 .pagination-controls {
   display: flex;
