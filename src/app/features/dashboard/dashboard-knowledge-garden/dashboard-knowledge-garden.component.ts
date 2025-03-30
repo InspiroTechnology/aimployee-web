@@ -61,6 +61,11 @@ export class DashboardKnowledgeGardenComponent implements OnInit {
       });
   }
 
+  handleMessage(message: string): void {
+    console.log('Received message from chat component:', message);
+    // Add logic to process the message, e.g., send it to a service or display it
+  }
+
   // downloadFile(fileUrl: string): void {
   //   const link = document.createElement('a');
   //   link.href = fileUrl;
