@@ -1,14 +1,16 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { CommonModule, NgFor } from '@angular/common';
 import { KnowledgeGardenService } from '../../../../services/knowledge-garden.service';
 import { TagService } from '../../../../services/tag.service';
 import { Subscription } from 'rxjs';
 import { MatGridListModule } from '@angular/material/grid-list';
+import { MatCardModule } from '@angular/material/card';
+import { MatPaginatorModule, PageEvent } from '@angular/material/paginator';
 
 @Component({
   selector: 'app-knoledege-list',
   standalone: true,
-  imports: [CommonModule, MatGridListModule],
+  imports: [CommonModule, MatGridListModule, NgFor, MatCardModule, MatPaginatorModule],
   templateUrl: './knoledege-list.component.html',
   styleUrls: ['./knoledege-list.component.scss'],
 })
@@ -19,6 +21,15 @@ export class KnoledegeListComponent implements OnInit, OnDestroy {
   totalRecords: number = 0;
   Math = Math; // Expose Math object for use in the template
   Array = Array; // Expose Array object for use in the template
+
+  allCards = Array.from({ length: 50 }, (_, i) => ({
+    title: `Card ${i + 1}`,
+    content: `This is the content of card ${i + 1}`
+  }));
+  pagedCards = this.allCards.slice(0, 10);
+  totalCards = this.allCards.length;
+
+  
   private tagSubscription: Subscription | null = null;
 
   constructor(
@@ -43,6 +54,12 @@ export class KnoledegeListComponent implements OnInit, OnDestroy {
     }
   }
 
+  onPageChange(event: PageEvent): void {
+    const start = event.pageIndex * event.pageSize;
+    const end = start + event.pageSize;
+    this.pagedCards = this.allCards.slice(start, end);
+  }
+
   loadKnowledge(): void {
     const tags = this.tagService.getSelectedTag()
       ? [this.tagService.getSelectedTag()]
@@ -63,13 +80,13 @@ export class KnoledegeListComponent implements OnInit, OnDestroy {
       });
   }
 
-  onPageChange(newPage: number): void {
-    if (
-      newPage > 0 &&
-      newPage <= Math.ceil(this.totalRecords / this.pageSize)
-    ) {
-      this.currentPage = newPage;
-      this.loadKnowledge();
-    }
-  }
+  // onPageChange(newPage: number): void {
+  //   if (
+  //     newPage > 0 &&
+  //     newPage <= Math.ceil(this.totalRecords / this.pageSize)
+  //   ) {
+  //     this.currentPage = newPage;
+  //     this.loadKnowledge();
+  //   }
+  // }
 }

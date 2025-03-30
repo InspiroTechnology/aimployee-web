@@ -1,6 +1,36 @@
-<div class="knowledge-garden-container">
+<!-- <div class="knowledge-garden-container">
 
-</div>
+</div> -->
+<div class="container">
+    <!-- Header -->
+     <div  class="header">
+        <h2>Knowledge Garden</h2>
+
+     </div>
+
+    <!-- Cards Grid: 2 rows × 5 columns -->
+    <div class="card-grid">
+        <!-- <p>dd</p> -->
+      <!-- <mat-card *ngFor="let card of pagedCards" class="card">
+        <mat-card-title>{{ card.title }}</mat-card-title>
+        <mat-card-content>{{ card.content }}</mat-card-content>
+      </mat-card> -->
+    </div>
+
+    <!-- Pagination -->
+    <div class="pagination-controls">
+      <mat-paginator [length]="totalCards"
+                     [pageSize]="10"
+                     [pageSizeOptions]="[10]"
+                     (page)="onPageChange($event)">
+      </mat-paginator>
+    </div>
+    <!-- <mat-paginator  [length]="totalCards"
+                   [pageSize]="10"
+                   [pageSizeOptions]="[10]"
+                   (page)="onPageChange($event)">
+    </mat-paginator> -->
+  </div>
 
 <!-- <div>
         <h2>Knowledge Garden</h2>
