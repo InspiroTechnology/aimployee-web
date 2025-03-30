@@ -1,6 +1,8 @@
 .layout {
   display: flex;
-  height: calc(100% - 1rem); // Subtract the vertical margin (0.5rem top + 0.5rem bottom)
+  height: calc(
+    100% - 1rem
+  ); // Subtract the vertical margin (0.5rem top + 0.5rem bottom)
   border-radius: var(--border-radius-sm);
   border: 2px solid var(--border-color);
   margin: 0.5rem;
@@ -18,7 +20,7 @@
   // box-sizing: border-box;
 }
 
-.box{
+.box {
   margin: 0.5rem;
   border-radius: var(--border-radius-sm);
   border: 2px solid var(--border-color);
@@ -34,7 +36,8 @@
 
 .top {
   display: flex;
-  flex: 1;
+  height: 300px;
+  min-height: 300px;
 }
 
 .left {
