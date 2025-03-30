@@ -3,11 +3,12 @@ import { CommonModule } from '@angular/common';
 import { KnowledgeGardenService } from '../../../../services/knowledge-garden.service';
 import { TagService } from '../../../../services/tag.service';
 import { Subscription } from 'rxjs';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @Component({
   selector: 'app-knoledege-list',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, MatGridListModule],
   templateUrl: './knoledege-list.component.html',
   styleUrls: ['./knoledege-list.component.scss'],
 })
