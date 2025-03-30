@@ -1,0 +1,27 @@
+.knowledge-chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  align-items: center;
+  height: 100%;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem;
+  border: 2px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+}
+
+.chat-textarea {
+  width: 100%;
+  height: calc(100% - 3rem); // Leave space for the button
+  margin-bottom: 1rem;
+  padding: 0.5rem;
+  box-sizing: border-box;
+  border: 1px solid var(--border-color);
+  border-radius: var(--border-radius-sm);
+  resize: none;
+}
+
+button {
+  align-self: flex-end;
+}

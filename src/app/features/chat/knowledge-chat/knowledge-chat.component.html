@@ -1,1 +1,4 @@
-<p>knowledge-chat works!</p>
+<div class="knowledge-chat">
+  <textarea matInput placeholder="Type your message..." [(ngModel)]="message" class="chat-textarea"></textarea>
+  <button mat-raised-button color="primary" (click)="sendMessage()">Send</button>
+</div>
